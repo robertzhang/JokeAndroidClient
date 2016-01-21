@@ -4,7 +4,7 @@ package cn.robertzhang.libraries.eventbus;
  * Created by robertzhang on 16/1/20.
  * email: robertzhangsh@gmail.com
  */
-public abstract class IEventBus {
+public abstract interface IEventBus {
 
     /*
      * 可根据需要对下面的抽象方法进行隐藏

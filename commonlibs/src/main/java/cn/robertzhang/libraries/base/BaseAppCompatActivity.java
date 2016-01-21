@@ -17,6 +17,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import cn.robertzhang.libraries.R;
 import cn.robertzhang.libraries.eventbus.EventMessage;
+import cn.robertzhang.libraries.eventbus.IEventBus;
 import cn.robertzhang.libraries.loadingview.LoadingViewHelperController;
 import cn.robertzhang.libraries.netstatus.NetChangeObserver;
 import cn.robertzhang.libraries.netstatus.NetStateReceiver;
@@ -28,7 +29,7 @@ import de.greenrobot.event.EventBus;
  * Created by robertzhang on 16/1/20.
  * email: robertzhangsh@gmail.com
  */
-public abstract class BaseAppCompatActivity extends AppCompatActivity{
+public abstract class BaseAppCompatActivity extends AppCompatActivity implements IEventBus{
 
     /**
      * Log tag
@@ -257,6 +258,15 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity{
      * get the overridePendingTransition mode
      */
     protected abstract TransitionMode getOverridePendingTransitionMode();
+
+    // begin --- implements IEventBus method
+    public void onEventBackground(EventMessage eventMessage){
+        if (null != eventMessage) {
+            onEventComming(eventMessage);
+        }
+    }
+    // end --- implements IEventBus method
+
 
     /**
      * startActivity
