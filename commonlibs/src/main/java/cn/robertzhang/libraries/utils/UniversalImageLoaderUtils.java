@@ -22,29 +22,30 @@ import cn.robertzhang.libraries.R;
  * email: robertzhangsh@gmail.com
  */
 
-public class UniversalImageLoaderHelper {
+public class UniversalImageLoaderUtils {
 
     /**
      *
      *
-     * 该类为universal-image-loader开源库的操作
+     * 该类为使用universal-image-loader开源库的配置辅助类辅助类
      *
+     * init eg. ImageLoader.getInstance().init(ImageLoaderHelper.getInstance(this).getImageLoaderConfiguration(IMAGE_LOADER_CACHE_PATH));
      *
      *
      */
 
     private Context mContext = null;
-    private static volatile UniversalImageLoaderHelper instance = null;
+    private static volatile UniversalImageLoaderUtils instance = null;
 
-    private UniversalImageLoaderHelper(Context context) {
+    private UniversalImageLoaderUtils(Context context) {
         mContext = context;
     }
 
-    public static UniversalImageLoaderHelper getInstance(Context context) {
+    public static UniversalImageLoaderUtils getInstance(Context context) {
         if (null == instance) {
-            synchronized (UniversalImageLoaderHelper.class) {
+            synchronized (UniversalImageLoaderUtils.class) {
                 if (null == instance) {
-                    instance = new UniversalImageLoaderHelper(context);
+                    instance = new UniversalImageLoaderUtils(context);
                 }
             }
         }
