@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2015 [1076559197@qq.com | tchen0707@gmail.com]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License”);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package cn.robertzhang.libraries.base;
 
 import android.content.Context;
@@ -6,7 +22,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +33,6 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import cn.robertzhang.libraries.R;
 import cn.robertzhang.libraries.eventbus.EventMessage;
-import cn.robertzhang.libraries.eventbus.IEventBus;
 import cn.robertzhang.libraries.loadingview.LoadingViewHelperController;
 import cn.robertzhang.libraries.netstatus.NetChangeObserver;
 import cn.robertzhang.libraries.netstatus.NetStateReceiver;
@@ -26,10 +41,12 @@ import cn.robertzhang.libraries.utils.NetUtils;
 import de.greenrobot.event.EventBus;
 
 /**
- * Created by robertzhang on 16/1/20.
- * email: robertzhangsh@gmail.com
+ * Author:  Tau.Chen
+ * Email:   1076559197@qq.com | tauchen1990@gmail.com
+ * Date:    2015/3/9.
+ * Description:
  */
-public abstract class BaseAppCompatActivity extends AppCompatActivity implements IEventBus{
+public abstract class BaseFragmentActivity extends FragmentActivity {
 
     /**
      * Log tag
@@ -70,22 +87,22 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
         if (toggleOverridePendingTransition()) {
             switch (getOverridePendingTransitionMode()) {
                 case LEFT:
-                    overridePendingTransition(R.anim.left_in,R.anim.left_out);
+                    overridePendingTransition(R.anim.left_in, R.anim.left_out);
                     break;
                 case RIGHT:
-                    overridePendingTransition(R.anim.right_in,R.anim.right_out);
+                    overridePendingTransition(R.anim.right_in, R.anim.right_out);
                     break;
                 case TOP:
-                    overridePendingTransition(R.anim.top_in,R.anim.top_out);
+                    overridePendingTransition(R.anim.top_in, R.anim.top_out);
                     break;
                 case BOTTOM:
-                    overridePendingTransition(R.anim.bottom_in,R.anim.bottom_out);
+                    overridePendingTransition(R.anim.bottom_in, R.anim.bottom_out);
                     break;
                 case SCALE:
-                    overridePendingTransition(R.anim.scale_in,R.anim.scale_out);
+                    overridePendingTransition(R.anim.scale_in, R.anim.scale_out);
                     break;
                 case FADE:
-                    overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     break;
             }
         }
@@ -164,19 +181,19 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
                     overridePendingTransition(R.anim.left_in, R.anim.left_out);
                     break;
                 case RIGHT:
-                    overridePendingTransition(R.anim.right_in,R.anim.right_out);
+                    overridePendingTransition(R.anim.right_in, R.anim.right_out);
                     break;
                 case TOP:
-                    overridePendingTransition(R.anim.top_in,R.anim.top_out);
+                    overridePendingTransition(R.anim.top_in, R.anim.top_out);
                     break;
                 case BOTTOM:
-                    overridePendingTransition(R.anim.bottom_in,R.anim.bottom_out);
+                    overridePendingTransition(R.anim.bottom_in, R.anim.bottom_out);
                     break;
                 case SCALE:
-                    overridePendingTransition(R.anim.scale_in,R.anim.scale_out);
+                    overridePendingTransition(R.anim.scale_in, R.anim.scale_out);
                     break;
                 case FADE:
-                    overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                     break;
             }
         }
@@ -258,15 +275,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
      * get the overridePendingTransition mode
      */
     protected abstract TransitionMode getOverridePendingTransitionMode();
-
-    // begin --- implements IEventBus method
-    public void onEventBackground(EventMessage eventMessage){
-        if (null != eventMessage) {
-            onEventComming(eventMessage);
-        }
-    }
-    // end --- implements IEventBus method
-
 
     /**
      * startActivity
@@ -350,14 +358,11 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
      * @param msg
      */
     protected void showToast(String msg) {
-        //防止遮盖虚拟按键
         if (null != msg && !CommonUtils.isEmpty(msg)) {
-            Snackbar.make(getLoadingTargetView(), msg, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
         }
     }
 
-
-    // 注释 begin ----- 用于控制加载页面的响应和显示等操作 ------
     /**
      * toggle show loading
      *
@@ -425,7 +430,12 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
             mLoadingViewHelperController.restore();
         }
     }
-    // 注释 end ----- 用于控制加载页面的响应和显示等操作 ------
+
+//    public void onEventMainThread(EventMessage eventCenter) {
+//        if (null != eventCenter) {
+//            onEventComming(eventCenter);
+//        }
+//    }
 
     /**
      * use SytemBarTintManager
@@ -464,7 +474,4 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
             win.setAttributes(winParams);
         }
     }
-
-
-
 }

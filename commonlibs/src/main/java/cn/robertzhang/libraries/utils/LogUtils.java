@@ -19,6 +19,10 @@ public class LogUtils {
         }
     }
 
+    public static void E(String str) {
+        E("zhangchao",str);
+    }
+
     /**
      * DeBug Log
      * @param str
