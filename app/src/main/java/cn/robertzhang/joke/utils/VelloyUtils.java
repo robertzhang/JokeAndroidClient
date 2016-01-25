@@ -1,8 +1,8 @@
 package cn.robertzhang.joke.utils;
 
 /**
- * Created by robertzhang on 16/1/20.
+ * Created by robertzhang on 16/1/25.
  * email: robertzhangsh@gmail.com
  */
-public class JokeJsonParserHelper {
+public class VelloyUtils {
 }

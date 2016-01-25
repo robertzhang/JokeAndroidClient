@@ -1,6 +1,8 @@
-package cn.robertzhang.joke.model.entities;
+package cn.robertzhang.joke.model.entities.joke;
 
 import java.util.List;
+
+import cn.robertzhang.joke.model.entities.joke.Item;
 
 /**
  * Created by robertzhang on 16/1/20.
@@ -42,7 +44,7 @@ public class JokeResult {
      * type : hot
      */
 
-    private List<JokeItems> items;
+    private List<Item> items;
 
     public void setCount(int count) {
         this.count = count;
@@ -64,7 +66,7 @@ public class JokeResult {
         this.refresh = refresh;
     }
 
-    public void setItems(List<JokeItems> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
@@ -88,7 +90,7 @@ public class JokeResult {
         return refresh;
     }
 
-    public List<JokeItems> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 

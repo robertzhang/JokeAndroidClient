@@ -29,4 +29,28 @@ public class APIContants {
      */
     public static final String IMG_JOKE = "http://pic.qiushibaike.com/system/pictures/";
 
+    /*
+     * one一个的接口
+     */
+    /**
+     * 首页
+     * eg. http://rest.wufazhuce.com/OneForWeb/one/getHp_N?strDate=2016-01-22&strRow=9
+     */
+    public static final String URL_HOME_ONE = "http://rest.wufazhuce.com/OneForWeb/one/getHp_N";
+    /**
+     * 文章
+     */
+    public static final String URL_ARTICLE_ONE = "http://rest.wufazhuce.com/OneForWeb/one/getC_N";
+    /**
+     * 问题
+     */
+    public static final String URL_QUESTION_ONE = "http://rest.wufazhuce.com/OneForWeb/one/getQ_N";
+    /**
+     * 东西
+     */
+    public static final String URL_THING_ONE = "http://rest.wufazhuce.com/OneForWeb/one/o_f";
+    /**
+     * 喜欢/取消喜欢
+     */
+    public static final String URL_LIKE_OR_CANCLELIKE = "http://bea.wufazhuce.com/OneForWeb/onest/praiseAppItemSomeId";
 }

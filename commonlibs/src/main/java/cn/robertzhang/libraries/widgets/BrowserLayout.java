@@ -31,6 +31,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import cn.robertzhang.libraries.R;
 import cn.robertzhang.libraries.utils.CommonUtils;
 
 
