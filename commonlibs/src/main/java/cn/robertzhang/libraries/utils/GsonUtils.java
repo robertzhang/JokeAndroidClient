@@ -49,7 +49,6 @@ public class GsonUtils {
         List<T> list = new ArrayList<T>();
         try {
             Gson gson = new Gson();
-            LogUtils.E("GsonUtils","str---"+jsonString+", cls:"+cls);
             list = gson.fromJson(jsonString, new TypeToken<List<T>>() {
             }.getType());
         } catch (Exception e) {}

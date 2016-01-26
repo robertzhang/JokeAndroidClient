@@ -29,9 +29,9 @@ public class VolleyHelper {
 
     public static RequestQueue mRequestQueue;
 
-    public Context mContext;
+    private Context mContext;
 
-    public VolleyCallBack mCallback;
+    private VolleyCallBack mCallback;
 
     public static VolleyHelper getInstance(Context context) {
         if (mInstance == null) {
@@ -40,7 +40,7 @@ public class VolleyHelper {
         return mInstance;
     }
 
-    public VolleyHelper(Context context) {
+    private VolleyHelper(Context context) {
         mContext = context;
         mRequestQueue = Volley.newRequestQueue(context);
     }
@@ -57,13 +57,11 @@ public class VolleyHelper {
             @Override
             public void onResponse(String response) {
                 mCallback.onVolleyResponseSucc(response);
-                LogUtils.E("getNetData:" + response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 mCallback.onVolleyResponseFail(error.getMessage());
-                LogUtils.E("message:"+error.getMessage() +", error: "+ error);
             }
         });
         mRequestQueue.add(strRequest);
@@ -75,15 +73,10 @@ public class VolleyHelper {
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
                         mCallback.onVolleyResponseSucc(response);
-                        LogUtils.E("postNetData:"+response);
-                        Toast.makeText(mContext, succ+"成功", Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 mCallback.onVolleyResponseFail(error.getMessage());
-                LogUtils.E("postNetData errormessage:" + error.getMessage() + ";error:" + error);
-                Toast.makeText(mContext, succ+"失败", Toast.LENGTH_SHORT).show();
-//                Snackbar.make(getLoadingTargetView(), succ+"失败", Snackbar.LENGTH_SHORT).show();
             }
         }) {
             protected Map<String, String> getParams() {
@@ -99,13 +92,10 @@ public class VolleyHelper {
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
                         mCallback.onVolleyResponseSucc(response);
-                        LogUtils.E("deleteNetData:"+response);
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
                 mCallback.onVolleyResponseFail(error.getMessage());
-                LogUtils.E("deleteNetData:"+ error.getMessage()+";error:"+error);
-                Toast.makeText(mContext, succ+"失败", Toast.LENGTH_SHORT).show();
             }
         });
         mRequestQueue.add(stringRequest);
@@ -125,7 +115,6 @@ public class VolleyHelper {
             @Override
             public void onResponse(JSONObject response) {
                 mCallback.onVolleyResponseSucc(response.toString());
-                LogUtils.E("jsonObjectRequestPostSuccess===="+response);
             }
 
         }, new Response.ErrorListener() {
@@ -133,8 +122,6 @@ public class VolleyHelper {
             public void onErrorResponse(VolleyError error) {
                 if (error.networkResponse != null) {
                     mCallback.onVolleyResponseFail(error.getMessage());
-                    LogUtils.E("jsonObjectRequestPostSuccess===error==" + error.networkResponse.statusCode);
-                    Toast.makeText(mContext, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

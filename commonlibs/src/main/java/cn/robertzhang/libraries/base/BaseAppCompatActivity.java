@@ -265,6 +265,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
             onEventComming(eventMessage);
         }
     }
+
     // end --- implements IEventBus method
 
 
