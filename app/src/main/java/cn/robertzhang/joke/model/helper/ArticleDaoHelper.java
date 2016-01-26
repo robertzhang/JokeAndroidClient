@@ -19,4 +19,5 @@ public class ArticleDaoHelper extends GreenDaoUtilsAbs<Article, ArticleDao> {
     protected void setDao() {
         dao = JokeApplication.getDaoSession().getArticleDao();
     }
+
 }
