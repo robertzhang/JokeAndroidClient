@@ -15,6 +15,7 @@ import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import butterknife.ButterKnife;
 import cn.robertzhang.libraries.R;
 import cn.robertzhang.libraries.eventbus.EventMessage;
 import cn.robertzhang.libraries.eventbus.IEventBus;
@@ -29,7 +30,7 @@ import de.greenrobot.event.EventBus;
  * Created by robertzhang on 16/1/20.
  * email: robertzhangsh@gmail.com
  */
-public abstract class BaseAppCompatActivity extends AppCompatActivity implements IEventBus{
+public abstract class BaseAppCompatActivity extends AppCompatActivity{
 
     /**
      * Log tag
@@ -148,7 +149,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
-//        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         if (null != getLoadingTargetView()) {
             mLoadingViewHelperController = new LoadingViewHelperController(getLoadingTargetView());
         }
@@ -186,6 +187,7 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     protected void onDestroy() {
         super.onDestroy();
 //        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
         NetStateReceiver.removeRegisterObserver(mNetChangeObserver);
         if (isBindEventBusHere()) {
             EventBus.getDefault().unregister(this);
@@ -260,11 +262,13 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity implements
     protected abstract TransitionMode getOverridePendingTransitionMode();
 
     // begin --- implements IEventBus method
-    public void onEventBackground(EventMessage eventMessage){
+
+    public void onEvent(EventMessage eventMessage) {
         if (null != eventMessage) {
             onEventComming(eventMessage);
         }
     }
+
 
     // end --- implements IEventBus method
 

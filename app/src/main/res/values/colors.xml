@@ -3,4 +3,24 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="color_primary">#FF4E3E7F</color>
+    <color name="color_primary_dark">#FF4E3E7F</color>
+    <color name="window_background">#FFFEFEFE</color>
+
+    <color name="darkish">#141217</color>
+    <color name="whitish">#f8f8f8</color>
+
+    <color name="toolbarBright">#acacac</color>
+    <color name="toolbarDark">@color/darkish</color>
+    <color name="gray">#504F51</color>
+    <color name="light_grey">#cacaca</color>
+    <color name="divider_line">#C6C7C9</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+
+    <!-- smart tab layout -->
+    <color name="smart_tab_underline_color">@color/gplus_color_4</color>
+
 </resources>

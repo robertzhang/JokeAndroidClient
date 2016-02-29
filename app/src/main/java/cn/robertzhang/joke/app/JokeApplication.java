@@ -5,6 +5,7 @@ import android.content.Context;
 
 import cn.robertzhang.joke.model.dao.DaoMaster;
 import cn.robertzhang.joke.model.dao.DaoSession;
+import cn.robertzhang.libraries.base.BaseAppManager;
 
 /**
  * Created by robertzhang on 16/1/23.
@@ -43,5 +44,14 @@ public class JokeApplication extends Application{
             mDaoSession = daoMaster.newSession();
         }
         return mDaoSession;
+    }
+
+    /**
+     * 退出程序
+     */
+    public void exitApp() {
+        BaseAppManager.getInstance().clear();
+        System.gc();
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
  }

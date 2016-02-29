@@ -31,8 +31,10 @@ import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import butterknife.ButterKnife;
 import cn.robertzhang.libraries.R;
 import cn.robertzhang.libraries.eventbus.EventMessage;
+import cn.robertzhang.libraries.eventbus.IEventBus;
 import cn.robertzhang.libraries.loadingview.LoadingViewHelperController;
 import cn.robertzhang.libraries.netstatus.NetChangeObserver;
 import cn.robertzhang.libraries.netstatus.NetStateReceiver;
@@ -46,7 +48,7 @@ import de.greenrobot.event.EventBus;
  * Date:    2015/3/9.
  * Description:
  */
-public abstract class BaseFragmentActivity extends FragmentActivity {
+public abstract class BaseFragmentActivity extends FragmentActivity implements IEventBus{
 
     /**
      * Log tag
@@ -165,6 +167,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+        ButterKnife.bind(this);
 //        ButterKnife.inject(this);
         if (null != getLoadingTargetView()) {
             mLoadingViewHelperController = new LoadingViewHelperController(getLoadingTargetView());
@@ -203,6 +206,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
 //        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
         NetStateReceiver.removeRegisterObserver(mNetChangeObserver);
         if (isBindEventBusHere()) {
             EventBus.getDefault().unregister(this);
@@ -431,11 +435,28 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         }
     }
 
-//    public void onEventMainThread(EventMessage eventCenter) {
-//        if (null != eventCenter) {
-//            onEventComming(eventCenter);
-//        }
-//    }
+    // begin --- implements IEventBus method
+    public void onEventBackground(EventMessage eventMessage){
+        if (null != eventMessage) {
+            onEventComming(eventMessage);
+        }
+    }
+
+    @Override
+    public void onEvent(EventMessage eventMessage) {
+
+    }
+
+    @Override
+    public void onEventMainThread(EventMessage eventMessage) {
+
+    }
+
+    @Override
+    public void onEventAsync(EventMessage eventMessage) {
+
+    }
+    // end --- implements IEventBus method
 
     /**
      * use SytemBarTintManager

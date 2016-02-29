@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:orientation="vertical"
+    card_view:cardCornerRadius="15dp"
+    card_view:cardElevation="@dimen/cardview_default_elevation"
+    card_view:cardPreventCornerOverlap="true"
+    card_view:cardUseCompatPadding="true"
+
+    >
+
+    <LinearLayout
+        android:background="#AAe6e6e6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            >
+            <ImageView
+                android:id="@+id/cardview_avator_iv"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher"/>
+            <TextView
+                android:id="@+id/cardview_avator_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="robert zhang"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/cardview_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="label，label，)"
+            android:ellipsize="none"
+            android:layout_margin="5dp"/>
+
+        <cn.robertzhang.libraries.widgets.SmoothImageView
+            android:id="@+id/cardview_siv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@mipmap/ic_launcher"
+            />
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">逗逼VS文青</string>
+
+    <string name="menu_about_str">关于我</string>
+    <string name="menu_github_str">GetHub相关</string>
+    <string name="double_click_exit">再按一次退出</string>
+
+    <string name="home">首页</string>
+    <string name="article">文章</string>
+    <string name="question">问题</string>
+    <string name="thing">东西</string>
+
+    <string name="hot">热门</string>
+    <string name="newst">最新</string>
+    <string name="truth">真相</string>
+</resources>

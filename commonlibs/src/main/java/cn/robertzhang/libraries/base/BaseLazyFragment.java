@@ -32,7 +32,9 @@ import android.view.ViewGroup;
 
 import java.lang.reflect.Field;
 
+import butterknife.ButterKnife;
 import cn.robertzhang.libraries.eventbus.EventMessage;
+import cn.robertzhang.libraries.eventbus.IEventBus;
 import cn.robertzhang.libraries.loadingview.LoadingViewHelperController;
 import cn.robertzhang.libraries.utils.CommonUtils;
 import de.greenrobot.event.EventBus;
@@ -43,7 +45,7 @@ import de.greenrobot.event.EventBus;
  * Date:    2015/4/13.
  * Description:
  */
-public abstract class BaseLazyFragment extends Fragment {
+public abstract class BaseLazyFragment extends Fragment{
 
     /**
      * Log tag
@@ -84,19 +86,21 @@ public abstract class BaseLazyFragment extends Fragment {
         }
     }
 
-    @Override
+    // 因为项目项目需要暂时关闭该方法
+   /* @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (getContentViewLayoutID() != 0) {
             return inflater.inflate(getContentViewLayoutID(), null);
         } else {
             return super.onCreateView(inflater, container, savedInstanceState);
         }
-    }
+    }*/
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        ButterKnife.inject(this, view);
+        ButterKnife.bind(this,view);
 
         if (null != getLoadingTargetView()) {
             mLoadingViewHelperController = new LoadingViewHelperController(getLoadingTargetView());
@@ -116,6 +120,7 @@ public abstract class BaseLazyFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
 //        ButterKnife.reset(this);
+        ButterKnife.unbind(this);
     }
 
     @Override
@@ -387,9 +392,14 @@ public abstract class BaseLazyFragment extends Fragment {
         }
     }
 
-//    public void onEventMainThread(EventMessage eventCenter) {
-//        if (null != eventCenter) {
-//            onEventComming(eventCenter);
-//        }
-//    }
+    // begin --- implements IEventBus method
+
+    public void onEvent(EventMessage eventMessage) {
+        if (null != eventMessage) {
+            onEventComming(eventMessage);
+        }
+    }
+
+
+    // end --- implements IEventBus method
 }
