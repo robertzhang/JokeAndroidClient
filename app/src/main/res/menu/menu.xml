@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/menu_about_str"
+        android:orderInCategory="200"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_github"
+        android:title="@string/menu_github_str"
+        android:orderInCategory="300"
+        app:showAsAction="never"/>
+</menu>

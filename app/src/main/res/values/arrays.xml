@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="joke_tab_list">
+        <item>@string/hot</item>
+        <item>@string/newst</item>
+        <item>@string/truth</item>
+    </string-array>
+
+    <string-array name="one_tab_list">
+        <item>@string/home</item>
+        <item>@string/article</item>
+        <item>@string/question</item>
+        <item>@string/thing</item>
+    </string-array>
+
+
+</resources>

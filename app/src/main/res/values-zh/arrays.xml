@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="joke_tab_list">
+        <item>热门</item>
+        <item>最新</item>
+        <item>真相</item>
+    </string-array>
+
+    <string-array name="one_tab_list">
+        <item>首页</item>
+        <item>文章</item>
+        <item>问题</item>
+        <item>东西</item>
+    </string-array>
+</resources>

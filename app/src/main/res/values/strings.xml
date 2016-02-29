@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">JokeAndroidClient</string>
+
+    <string name="menu_about_str">About me</string>
+    <string name="menu_github_str">GetHub</string>
+    <string name="double_click_exit">Press again to exit</string>
+
+    <string name="home">Home</string>
+    <string name="article">Article</string>
+    <string name="question">Question</string>
+    <string name="thing">Thing</string>
+
+    <string name="hot">Hot</string>
+    <string name="newst">Newst</string>
+    <string name="truth">Truth</string>
 </resources>

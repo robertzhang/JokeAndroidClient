@@ -18,6 +18,7 @@ import cn.robertzhang.libraries.volley.VolleyHelper;
 
 public class MainActivity extends AppCompatActivity implements VolleyCallBack{
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,4 +47,6 @@ public class MainActivity extends AppCompatActivity implements VolleyCallBack{
     public void onVolleyResponseFail(String error) {
         LogUtils.E("------onVolleyResponseFail-------"+error);
     }
+
+
 }
