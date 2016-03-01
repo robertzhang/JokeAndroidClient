@@ -24,14 +24,16 @@ public class JsonParserUtils {
     public static <T> T parseOneResponse(String str, Class<T> mClass) {
         OneResult result = GsonUtils.parseJson(str, OneResult.class);
         T parse = null;
-        if (mClass == Home.class) {
-            parse = (T)result.getHpEntity();
-        } else if (mClass == Article.class) {
-            parse = (T)result.getContentEntity();
-        } else if (mClass == Question.class) {
-            parse = (T)result.getQuestionAdEntity();
-        } else if (mClass == Thing.class) {
-            parse = (T)result.getEntTg();
+        if (result.getResult().equals("SUCCESS")) {
+            if (mClass == Home.class) {
+                parse = (T) result.getHpEntity();
+            } else if (mClass == Article.class) {
+                parse = (T) result.getContentEntity();
+            } else if (mClass == Question.class) {
+                parse = (T) result.getQuestionAdEntity();
+            } else if (mClass == Thing.class) {
+                parse = (T) result.getEntTg();
+            }
         }
         return parse;
     }

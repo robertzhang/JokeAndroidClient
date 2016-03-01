@@ -54,14 +54,6 @@ public class WenQArticleAdapter extends RecyclerView.Adapter<WenQArticleAdapter.
         return mArticle.size();
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//        int headerPosition = 0;
-//        int footerPosition = 1;
-//
-//
-//        return super.getItemViewType(position);
-//    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable

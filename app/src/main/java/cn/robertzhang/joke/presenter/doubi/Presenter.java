@@ -1,4 +1,4 @@
-package cn.robertzhang.joke.presenter;
+package cn.robertzhang.joke.presenter.doubi;
 
 /**
  * Created by robertzhang on 16/1/26.
