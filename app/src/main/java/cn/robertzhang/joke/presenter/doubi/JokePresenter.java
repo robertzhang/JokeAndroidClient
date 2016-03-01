@@ -1,15 +1,16 @@
-package cn.robertzhang.joke.presenter;
+package cn.robertzhang.joke.presenter.doubi;
 
 
 import cn.robertzhang.joke.R;
 import cn.robertzhang.joke.app.JokeApplication;
+import cn.robertzhang.joke.presenter.Presenter;
 import cn.robertzhang.joke.view.JokeView;
 
 /**
  * Created by robertzhang on 16/1/28.
  * email: robertzhangsh@gmail.com
  */
-public class JokePresenter implements Presenter{
+public class JokePresenter implements Presenter {
 
     private JokeView jokeView;
 
