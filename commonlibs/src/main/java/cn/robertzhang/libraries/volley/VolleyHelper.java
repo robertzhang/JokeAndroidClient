@@ -1,8 +1,6 @@
 package cn.robertzhang.libraries.volley;
 
 import android.content.Context;
-import android.support.design.widget.Snackbar;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -16,8 +14,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
-
-import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
  * Created by robertzhang on 16/1/25.
@@ -56,27 +52,27 @@ public class VolleyHelper {
         StringRequest strRequest = new StringRequest(url,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                mCallback.onVolleyResponseSucc(response);
+                mCallback.onVolleyResponseSucc(-1, response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mCallback.onVolleyResponseFail(error.getMessage());
+                mCallback.onVolleyResponseFail(-1, error.getMessage());
             }
         });
         mRequestQueue.add(strRequest);
     }
 
     // Volley处理post请求
-    public void postNetData(String url, final Map<String,String> map,final String succ){
+    public void postNetData(String url, final Map<String,String> map,final int type){
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
-                        mCallback.onVolleyResponseSucc(response);
+                        mCallback.onVolleyResponseSucc(type, response);
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                mCallback.onVolleyResponseFail(error.getMessage());
+                mCallback.onVolleyResponseFail(type, error.getMessage());
             }
         }) {
             protected Map<String, String> getParams() {
@@ -87,22 +83,22 @@ public class VolleyHelper {
     }
 
     // Volley处理delete请求
-    public void deleteNetData(String url,final String succ){
+    public void deleteNetData( String url,final int type){
         StringRequest stringRequest = new StringRequest(Request.Method.DELETE,url,
                 new Response.Listener<String>() {
                     public void onResponse(String response) {
-                        mCallback.onVolleyResponseSucc(response);
+                        mCallback.onVolleyResponseSucc(type, response);
                     }
                 }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError error) {
-                mCallback.onVolleyResponseFail(error.getMessage());
+                mCallback.onVolleyResponseFail(type, error.getMessage());
             }
         });
         mRequestQueue.add(stringRequest);
     }
 
     // Volley处理JsonObject请求
-    public void JsonStringObejectRequest(String url,String json) {
+    public void JsonStringObejectRequest( String url,String json) {
         JSONObject params = null;
         try {
             params = new JSONObject(json);//需要注意的是，这里的json必须是对象的形式。
@@ -114,14 +110,14 @@ public class VolleyHelper {
                 new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                mCallback.onVolleyResponseSucc(response.toString());
+                mCallback.onVolleyResponseSucc(-1, response.toString());
             }
 
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error.networkResponse != null) {
-                    mCallback.onVolleyResponseFail(error.getMessage());
+                    mCallback.onVolleyResponseFail(-1, error.getMessage());
                 }
             }
         });

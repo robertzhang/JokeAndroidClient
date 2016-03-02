@@ -6,7 +6,12 @@ package cn.robertzhang.libraries.volley;
  */
 public interface VolleyCallBack {
 
-    public void onVolleyResponseSucc(String jsonStr);
+    /**
+     *  type用来标记是哪个请求动作
+     *
+     *  如果不需要type，则默认值为：-1
+     */
+    public void onVolleyResponseSucc(int type, String jsonStr);
 
-    public void onVolleyResponseFail(String error);
+    public void onVolleyResponseFail(int type, String error);
 }
