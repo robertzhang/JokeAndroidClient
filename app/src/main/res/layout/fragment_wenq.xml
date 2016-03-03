@@ -3,8 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +15,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
-            android:background="@color/gplus_color_3"
             >
             <FrameLayout
                 android:id="@+id/wenqin_content"
@@ -36,7 +33,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="1dp"
                 android:orientation="horizontal" >
                 <RadioButton
                     android:id="@+id/menu_home"

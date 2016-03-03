@@ -8,6 +8,7 @@ import cn.robertzhang.joke.config.Contants;
 import cn.robertzhang.joke.utils.JsonParserUtils;
 import cn.robertzhang.joke.utils.VelloyUtils;
 import cn.robertzhang.joke.view.ILoadView;
+import cn.robertzhang.libraries.utils.LogUtils;
 import cn.robertzhang.libraries.utils.TimeUtil;
 import cn.robertzhang.libraries.volley.VolleyCallBack;
 
@@ -28,7 +29,7 @@ public abstract class WenQLoadDataPresenter<T> implements VolleyCallBack{
 
     protected int index = 1; // 加载页数
 
-    public ILoadView mIView;// IView回调视图的接口
+    public ILoadView<T> mIView;// IView回调视图的接口
 
     List<T> mList = null;// 数据
 
@@ -37,7 +38,11 @@ public abstract class WenQLoadDataPresenter<T> implements VolleyCallBack{
         this.mIView = mIView;
     }
 
-    public abstract String getModuleURL();
+    protected abstract String getModuleURL();
+
+    public List<T> getData(){
+        return mList;
+    }
 
 
     // -------- user action
@@ -49,12 +54,12 @@ public abstract class WenQLoadDataPresenter<T> implements VolleyCallBack{
 
     public void onRefrest(){
         String strDate = TimeUtil.getDate();
-        String strRow = String.valueOf(0);
+        String strRow = String.valueOf(1);
         VelloyUtils.getWenQData(this, strDate, strRow, getModuleURL(), Contants.REFRESH);
     }
 
     // ----------- refresh UI
-    public void onLoadSucc(int type, String jsonStr) {
+    protected void onLoadSucc(int type, String jsonStr) {
         /**
          *  获取T.class的值
          */
@@ -64,12 +69,11 @@ public abstract class WenQLoadDataPresenter<T> implements VolleyCallBack{
         if (item == null) {
             mIView.loadError(type);
         } else {
-            mList.add(item);
-            mIView.refreshUI(type);
+            mIView.refreshUI(item, type);
         }
     }
 
-    public void onLoadFail(int type, String jsonStr) {
+    private void onLoadFail(int type, String jsonStr) {
         mIView.loadError(type);
     }
 

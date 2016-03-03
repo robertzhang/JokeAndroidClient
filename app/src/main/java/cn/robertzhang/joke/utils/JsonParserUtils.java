@@ -1,5 +1,7 @@
 package cn.robertzhang.joke.utils;
 
+import java.io.UnsupportedEncodingException;
+
 import cn.robertzhang.joke.model.entities.joke.JokeResult;
 import cn.robertzhang.joke.model.entities.one.Article;
 import cn.robertzhang.joke.model.entities.one.Home;
@@ -22,9 +24,22 @@ public class JsonParserUtils {
 
     // “One一个”返回数据解析
     public static <T> T parseOneResponse(String str, Class<T> mClass) {
-        OneResult result = GsonUtils.parseJson(str, OneResult.class);
+        String s = null;
+        // 对字符集进行转码
+        try {
+            if (mClass == Question.class || mClass == Article.class) {
+                s = new String(str.getBytes("ISO-8859-1"), "UTF-8");
+            } else {
+                s = str;
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        OneResult result = GsonUtils.parseJson(s, OneResult.class);
         T parse = null;
-        if (result.getResult().equals("SUCCESS")) {
+        if (result.getResult() != null && (result.getResult().equals("SUCCESS"))
+                || (result.getRs() != null && result.getRs().equals("SUCCESS"))) {
             if (mClass == Home.class) {
                 parse = (T) result.getHpEntity();
             } else if (mClass == Article.class) {

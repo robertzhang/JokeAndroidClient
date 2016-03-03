@@ -14,4 +14,6 @@
     <string name="hot">热门</string>
     <string name="newst">最新</string>
     <string name="truth">真相</string>
+
+    <string name="refresh_str">正在刷新数据....</string>
 </resources>

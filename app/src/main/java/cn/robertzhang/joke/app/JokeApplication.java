@@ -3,6 +3,8 @@ package cn.robertzhang.joke.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import cn.robertzhang.joke.model.dao.DaoMaster;
 import cn.robertzhang.joke.model.dao.DaoSession;
 import cn.robertzhang.libraries.base.BaseAppManager;
@@ -27,6 +29,11 @@ public class JokeApplication extends Application{
     public void onCreate(){
         super.onCreate();
         JokeApplication.mContext = getApplicationContext();
+        init();
+    }
+
+    private void init(){
+        Fresco.initialize(mContext);
     }
 
     public static Context getAppContext(){

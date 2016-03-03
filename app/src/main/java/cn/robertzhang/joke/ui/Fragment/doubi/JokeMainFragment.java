@@ -15,15 +15,14 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.robertzhang.joke.R;
-import cn.robertzhang.joke.presenter.JokePresenter;
-import cn.robertzhang.joke.presenter.Presenter;
+import cn.robertzhang.joke.presenter.doubi.JokePresenter;
+import cn.robertzhang.joke.presenter.doubi.Presenter;
 import cn.robertzhang.joke.ui.Fragment.BaseFragment;
 import cn.robertzhang.joke.ui.activity.BaseActivity;
 import cn.robertzhang.joke.ui.adapter.doubi.JokeFragmentVPAdapter;
 import cn.robertzhang.joke.view.JokeView;
 import cn.robertzhang.libraries.base.BaseLazyFragment;
 import cn.robertzhang.libraries.eventbus.EventMessage;
-import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
  * Created by robertzhang on 16/2/16.
