@@ -13,4 +13,6 @@
     <string name="hot">Hot</string>
     <string name="newst">Newst</string>
     <string name="truth">Truth</string>
+
+    <string name="refresh_str">refresh new data ....</string>
 </resources>

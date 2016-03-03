@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
-        android:visibility="gone">
+        >
 
         <TextView
             android:id="@+id/text_question_date"

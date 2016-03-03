@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -14,7 +14,6 @@ import cn.robertzhang.joke.ui.Fragment.BaseFragment;
 import cn.robertzhang.joke.ui.Fragment.SimpleBaseFragment;
 import cn.robertzhang.joke.ui.activity.BaseActivity;
 import cn.robertzhang.libraries.eventbus.EventMessage;
-import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
  * Created by robertzhang on 16/2/17.
@@ -89,11 +88,10 @@ public class WenQMainFragment extends BaseFragment {
         ((BaseActivity)mContext).setSupportActionBar(toolbar);
         ((BaseActivity)mContext).getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
 
-        LogUtils.E("zhangchao","========");
-        if (wenQArticleFragment == null) {
-            wenQArticleFragment = new WenQArticleFragment();
+        if (wenQHomeFragment == null){
+            wenQHomeFragment = new WenQHomeFragment();
         }
-        mCurrentFragment = wenQArticleFragment;
+        mCurrentFragment = wenQHomeFragment;
         switchContent(mCurrentFragment);
 
         tab_menu.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -113,9 +111,9 @@ public class WenQMainFragment extends BaseFragment {
                         break;
                     case R.id.menu_thing:
                         if (wenQThingFragment == null){
-                            wenQQuestionFragment = new WenQQuestionFragment();
+                            wenQThingFragment = new WenQThingFragment();
                         }
-                        mCurrentFragment = wenQQuestionFragment;
+                        mCurrentFragment = wenQThingFragment;
                         break;
                     case R.id.menu_question:
                         if (wenQQuestionFragment == null) {
@@ -131,7 +129,7 @@ public class WenQMainFragment extends BaseFragment {
 
     //切换Fragment
     public void switchContent(Fragment fragment) {
-        getActivity().getSupportFragmentManager()
+        getChildFragmentManager()
                 .beginTransaction()
                 .replace(R.id.wenqin_content, fragment, getTagString())
                 .commit();

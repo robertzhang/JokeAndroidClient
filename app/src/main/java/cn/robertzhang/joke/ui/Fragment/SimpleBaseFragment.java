@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import butterknife.ButterKnife;
 import cn.robertzhang.libraries.loadingview.LoadingViewHelperController;
 import cn.robertzhang.libraries.utils.CommonUtils;
@@ -18,13 +19,15 @@ import cn.robertzhang.libraries.utils.CommonUtils;
  * email: robertzhangsh@gmail.com
  */
 public abstract class SimpleBaseFragment extends Fragment {
-    private Context mContext;
-    private LoadingViewHelperController mLoadingViewHelperController = null;
 
+    private Context mContext;
+
+    private LoadingViewHelperController mLoadingViewHelperController = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        EventBus.getDefault().register(this);
         initData();
     }
 
@@ -51,6 +54,7 @@ public abstract class SimpleBaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+//        EventBus.getDefault().unregister(this);
     }
 
     /**

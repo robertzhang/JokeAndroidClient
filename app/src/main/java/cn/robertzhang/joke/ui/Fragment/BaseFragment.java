@@ -84,7 +84,6 @@ public abstract class BaseFragment extends BaseLazyFragment implements BaseView 
     }
 
     private void removeOldSideFragment() {
-        LogUtils.E("zhangchao","===removeOldSideFragment==="+getTagString());
         ((MainActivity2) mContext).removeAllFragmentExcept(getTagString());
     }
 
@@ -101,13 +100,6 @@ public abstract class BaseFragment extends BaseLazyFragment implements BaseView 
             postGoToSide(cy,cx,"doubi");
         }
 
-//        if (this instanceof JokeMainFragment && v.isChecked()) {
-//            cx = rect.right - halfThumbWidth;
-//            postGoToSide(cy, cx, "doubi");
-//        } else if (!v.isChecked()){
-//            cx = rect.left + halfThumbWidth;
-//            postGoToSide(cy, cx, "wenqing");
-//        }
     }
 
     private void postGoToSide(final int cy, final int cx, final String side) {

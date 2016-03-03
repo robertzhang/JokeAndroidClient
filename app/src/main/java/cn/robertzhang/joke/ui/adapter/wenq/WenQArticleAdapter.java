@@ -22,36 +22,35 @@ import cn.robertzhang.libraries.utils.TimeUtil;
  * Created by robertzhang on 16/2/18.
  * email: robertzhangsh@gmail.com
  */
-public class WenQArticleAdapter extends RecyclerView.Adapter<WenQArticleAdapter.ViewHolder> {
+public class WenQArticleAdapter extends WenQBaseAdapter<Article> {
 
-    private List<Article> mArticle;
 
-    public WenQArticleAdapter(List<Article> artcleList) {
-        mArticle = artcleList;
+    public WenQArticleAdapter(List<Article> mList) {
+        super(mList);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_wenq_article, null);
+    protected int getContentViewLayoutID() {
+        return R.layout.layout_wenq_article;
+    }
+
+    @Override
+    protected RecyclerView.ViewHolder getViewHolder(View view) {
         return new ViewHolder(view);
     }
 
-    @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.textArticleDate.setText(TimeUtil.getEngDate(mArticle.get(position).getStrContMarketTime()));
-        holder.textArticleTitle.setText(mArticle.get(position).getStrContTitle());
-        holder.textArticleAuthor.setText(mArticle.get(position).getStrContAuthor());
-        holder.textArticleContent.setText(Html.fromHtml(mArticle.get(position).getStrContent()));
-        holder.textArticleEditor.setText(mArticle.get(position).getStrContAuthorIntroduce());
-        holder.textArticleAuthorAddition.setText(mArticle.get(position).getStrContAuthor());
-        holder.textArticleAuthorWeibo.setText(mArticle.get(position).getSWbN());
-        holder.textArticleAuthorIntro.setText(mArticle.get(position).getSAuth());
-    }
-
 
     @Override
-    public int getItemCount() {
-        return mArticle.size();
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ViewHolder vh = (ViewHolder) holder;
+        vh.textArticleDate.setText(TimeUtil.getEngDate(mList.get(position).getStrContMarketTime()));
+        vh.textArticleTitle.setText(mList.get(position).getStrContTitle());
+        vh.textArticleAuthor.setText(mList.get(position).getStrContAuthor());
+        vh.textArticleContent.setText(Html.fromHtml(mList.get(position).getStrContent()));
+        vh.textArticleEditor.setText(mList.get(position).getStrContAuthorIntroduce());
+        vh.textArticleAuthorAddition.setText(mList.get(position).getStrContAuthor());
+        vh.textArticleAuthorWeibo.setText(mList.get(position).getSWbN());
+        vh.textArticleAuthorIntro.setText(mList.get(position).getSAuth());
     }
 
 
@@ -80,12 +79,11 @@ public class WenQArticleAdapter extends RecyclerView.Adapter<WenQArticleAdapter.
         @Nullable
         @Bind(R.id.text_article_author_intro) TextView textArticleAuthorIntro;
 
-        @Nullable
-        @Bind(R.id.article_content) LinearLayout articleContent;
-
         public ViewHolder(View item) {
             super(item);
             ButterKnife.bind(this, item);
         }
     }
+
+
 }
