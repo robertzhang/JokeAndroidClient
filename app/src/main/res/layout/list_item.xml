@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?android:attr/selectableItemBackground"
@@ -23,13 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/cardview_avator_iv"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_launcher"
-                android:layout_centerVertical="true"/>
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:placeholderImage="@drawable/picture_holder"/>
+            <!--<ImageView-->
+                <!--android:id="@+id/cardview_avator_iv"-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:scaleType="fitXY"-->
+                <!--android:src="@mipmap/ic_launcher"-->
+                <!--android:layout_centerVertical="true"/>-->
             <TextView
                 android:layout_toRightOf="@id/cardview_avator_iv"
                 android:id="@+id/cardview_avator_tv"

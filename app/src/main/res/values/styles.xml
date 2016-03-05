@@ -38,11 +38,12 @@
 
     <!-- doubi style theme -->
     <style name="DouBiAppThemeDark" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@android:color/holo_red_light</item>
-        <item name="colorPrimaryDark">@android:color/holo_red_dark</item>
+        <item name="colorPrimary">@color/toolbarDark</item>
+        <item name="colorPrimaryDark">@android:color/holo_red_light</item>
+        <item name="android:textColorPrimary">@android:color/holo_red_light</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorSwitchThumbNormal">@android:color/holo_red_light</item>
-        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/holo_red_light</item>
         <item name="colorControlActivated">@android:color/holo_red_light</item>
         <item name="viewStyle">@style/viewStyleDarkSide</item>
         <item name="toolbarBackground">@color/toolbarDark</item>
@@ -51,11 +52,12 @@
     </style>
     <!-- wenqing style theme -->
     <style name="WenQingAppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@android:color/holo_blue_light</item>
+        <item name="colorPrimary">@color/alpha_60_white</item>
         <item name="colorPrimaryDark">@android:color/holo_blue_bright</item>
+        <item name="android:textColorPrimary">@android:color/holo_blue_light</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorSwitchThumbNormal">@android:color/holo_blue_light</item>
-        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/holo_blue_light</item>
         <item name="colorControlActivated">@android:color/holo_blue_light</item>
         <item name="viewStyle">@style/viewStyleBrightSide</item>
         <item name="toolbarBackground">@color/toolbarBright</item>

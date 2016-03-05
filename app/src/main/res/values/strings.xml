@@ -15,4 +15,6 @@
     <string name="truth">Truth</string>
 
     <string name="refresh_str">refresh new data ....</string>
+    <string name="wenq_title">WenQ</string>
+    <string name="doubi_title">DouBi</string>
 </resources>
