@@ -3,23 +3,24 @@ package cn.robertzhang.joke.presenter.doubi;
 
 import cn.robertzhang.joke.R;
 import cn.robertzhang.joke.app.JokeApplication;
-import cn.robertzhang.joke.presenter.Presenter;
+import cn.robertzhang.joke.config.Contants;
+import cn.robertzhang.joke.utils.VelloyUtils;
 import cn.robertzhang.joke.view.JokeView;
 
 /**
  * Created by robertzhang on 16/1/28.
  * email: robertzhangsh@gmail.com
  */
-public class JokePresenter implements Presenter {
+public class JokeMainPresenter implements Presenter {
 
     private JokeView jokeView;
 
     public String[] jokeCategoryArray;
 
-    public JokePresenter(JokeView jokeView) {
+    public JokeMainPresenter(JokeView jokeView) {
         this.jokeView = jokeView;
     }
-    public JokePresenter(){
+    public JokeMainPresenter(){
         getJokeCategoryArray();
     }
 
@@ -34,4 +35,6 @@ public class JokePresenter implements Presenter {
         getJokeCategoryArray();
         jokeView.initializeViews(null);
     }
+
+
 }

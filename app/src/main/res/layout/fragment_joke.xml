@@ -55,9 +55,9 @@
                 <com.ogaclejapan.smarttablayout.SmartTabLayout
                     xmlns:app_tab="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/smart_tab_layout"
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/toolbarDark"
                     app_tab:stl_indicatorInterpolation="smart"
                     app_tab:stl_indicatorColor="@color/smart_tab_underline_color"
                     app_tab:stl_indicatorThickness="@dimen/smart_tab_indicator_height"
@@ -65,7 +65,7 @@
                     app_tab:stl_dividerColor="@android:color/transparent"
                     app_tab:stl_dividerThickness="5dp"
                     app_tab:stl_underlineColor="@android:color/transparent"
-                    app_tab:stl_defaultTabTextColor="@android:color/white"
+                    app_tab:stl_defaultTabTextColor="?android:textColorPrimary"
                     app_tab:stl_defaultTabTextSize="@dimen/big_small_text"
                     app_tab:stl_defaultTabTextHorizontalPadding="@dimen/smart_tab_padding"
                     android:layout_gravity="bottom"
@@ -80,6 +80,7 @@
             android:id="@+id/viewpage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/toolbarDark"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
 

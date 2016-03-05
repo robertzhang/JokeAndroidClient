@@ -21,6 +21,6 @@
     <color name="black">#ff000000</color>
 
     <!-- smart tab layout -->
-    <color name="smart_tab_underline_color">@color/gplus_color_4</color>
+    <color name="smart_tab_underline_color">@android:color/holo_red_light</color>
 
 </resources>

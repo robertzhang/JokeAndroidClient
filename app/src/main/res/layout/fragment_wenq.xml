@@ -32,9 +32,9 @@
                 android:id="@+id/tab_menu"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
+                android:background="?attr/colorPrimary"
                 android:layout_marginTop="1dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
                 <RadioButton
                     android:id="@+id/menu_home"
                     style="@style/RadioButtonStyle"
