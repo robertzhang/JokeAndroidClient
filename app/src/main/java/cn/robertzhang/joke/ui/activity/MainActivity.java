@@ -27,7 +27,7 @@ import cn.robertzhang.libraries.utils.NetUtils;
  * Created by robertzhang on 16/2/16.
  * email: robertzhangsh@gmail.com
  */
-public class MainActivity2 extends BaseActivity implements MainActivityInterface{
+public class MainActivity extends BaseActivity implements MainActivityInterface{
 
     @Bind(R.id.app_container)
     FrameLayout app_container;
@@ -153,13 +153,12 @@ public class MainActivity2 extends BaseActivity implements MainActivityInterface
     @Override
     protected void initViewsAndEvents() {
         fragment_doubi = JokeMainFragment.newInstance();
+//        fragment_wenqing = WenQMainFragment.newInstance();
+        fragment_current = fragment_doubi;
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.fade_in, 0)
-                .add(R.id.app_container, fragment_doubi, "doubi")
+                .add(R.id.app_container, fragment_current, "wenqing")
                 .commit();
-        fragment_current = fragment_doubi;
-
-
     }
 
     @Override
@@ -179,7 +178,7 @@ public class MainActivity2 extends BaseActivity implements MainActivityInterface
 
     @Override
     protected boolean isBindEventBusHere() {
-        return true;
+        return false;
     }
 
     @Override

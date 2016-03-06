@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import butterknife.Bind;
@@ -16,10 +14,9 @@ import cn.robertzhang.joke.config.Contants;
 import cn.robertzhang.joke.presenter.wenq.WenQLoadDataPresenter;
 import cn.robertzhang.joke.ui.Fragment.SimpleBaseFragment;
 import cn.robertzhang.joke.ui.adapter.wenq.WenQBaseAdapter;
-import cn.robertzhang.joke.view.ILoadView;
+import cn.robertzhang.joke.view.wenq.ILoadView;
 import cn.robertzhang.joke.widget.recyclerviewloadmore.ExRcvAdapterWrapper;
 import cn.robertzhang.joke.widget.recyclerviewloadmore.OnRcvScrollListener;
-import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
  * Created by robertzhang on 16/3/3.
@@ -125,6 +122,12 @@ public abstract class WenQBaseFragment<T> extends SimpleBaseFragment implements 
     @Override
     public void loadError(int type) {
         //根据操作，做出相应的错误处理
-
+        if (type == Contants.REFRESH) {
+            wenqin_list_rv.scrollToPosition(1);
+            showToast("服务器挂了，稍候再试....");
+        } else if (type == Contants.LOADMORE) {
+            wenqin_list_rv.scrollToPosition(mAdpter.getItemCount());
+            showToast("没有更多内容....");
+        }
     }
 }

@@ -101,7 +101,7 @@ public abstract class SimpleBaseFragment extends Fragment {
      */
     protected void showToast(String msg) {
         if (null != msg && !CommonUtils.isEmpty(msg)) {
-            Snackbar.make(((Activity) mContext).getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getActivity().getWindow().getDecorView(), msg, Snackbar.LENGTH_SHORT).show();
         }
     }
 

@@ -25,19 +25,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 
 import java.lang.reflect.Field;
 
 import butterknife.ButterKnife;
-import cn.robertzhang.libraries.eventbus.EventMessage;
-import cn.robertzhang.libraries.eventbus.IEventBus;
 import cn.robertzhang.libraries.loadingview.LoadingViewHelperController;
 import cn.robertzhang.libraries.utils.CommonUtils;
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Author:  Tau.Chen
@@ -81,10 +77,8 @@ public abstract class BaseLazyFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TAG_LOG = this.getClass().getSimpleName();
-        if (isBindEventBusHere()) {
-            EventBus.getDefault().register(this);
-        }
     }
+
 
     // 因为项目项目需要暂时关闭该方法
    /* @Override
@@ -126,9 +120,6 @@ public abstract class BaseLazyFragment extends Fragment{
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (isBindEventBusHere()) {
-            EventBus.getDefault().unregister(this);
-        }
     }
 
     @Override
@@ -156,6 +147,9 @@ public abstract class BaseLazyFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
+        if (isBindEventBusHere()) {
+            EventBus.getDefault().register(this);
+        }
         if (isFirstResume) {
             isFirstResume = false;
             return;
@@ -170,6 +164,9 @@ public abstract class BaseLazyFragment extends Fragment{
         super.onPause();
         if (getUserVisibleHint()) {
             onUserInvisible();
+        }
+        if (isBindEventBusHere()) {
+            EventBus.getDefault().unregister(this);
         }
     }
 
@@ -239,13 +236,6 @@ public abstract class BaseLazyFragment extends Fragment{
      * @return id of layout resource
      */
     protected abstract int getContentViewLayoutID();
-
-    /**
-     * when event comming
-     *
-     * @param eventMessage
-     */
-    protected abstract void onEventComming(EventMessage eventMessage);
 
     /**
      * is bind eventBus
@@ -391,15 +381,4 @@ public abstract class BaseLazyFragment extends Fragment{
             mLoadingViewHelperController.restore();
         }
     }
-
-    // begin --- implements IEventBus method
-
-    public void onEvent(EventMessage eventMessage) {
-        if (null != eventMessage) {
-            onEventComming(eventMessage);
-        }
-    }
-
-
-    // end --- implements IEventBus method
 }

@@ -84,9 +84,8 @@ public class WenQMainFragment extends BaseFragment {
 
     @Override
     protected void initViewsAndEvents() {
-
         ((BaseActivity)mContext).setSupportActionBar(toolbar);
-        ((BaseActivity)mContext).getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
+        ((BaseActivity)mContext).getSupportActionBar().setTitle(getResources().getString(R.string.wenq_title));
 
         if (wenQHomeFragment == null){
             wenQHomeFragment = new WenQHomeFragment();
@@ -140,10 +139,6 @@ public class WenQMainFragment extends BaseFragment {
         return R.layout.fragment_wenq;
     }
 
-    @Override
-    protected void onEventComming(EventMessage eventMessage) {
-
-    }
 
     @Override
     protected boolean isBindEventBusHere() {
