@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -16,11 +15,10 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 
 import butterknife.ButterKnife;
-import cn.robertzhang.joke.ui.activity.MainActivity2;
+import cn.robertzhang.joke.ui.activity.MainActivity;
 import cn.robertzhang.joke.view.BaseView;
 import cn.robertzhang.joke.widget.ClipRevealFrame;
 import cn.robertzhang.libraries.base.BaseLazyFragment;
-import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
  * Author:  Tau.Chen
@@ -84,7 +82,7 @@ public abstract class BaseFragment extends BaseLazyFragment implements BaseView 
     }
 
     private void removeOldSideFragment() {
-        ((MainActivity2) mContext).removeAllFragmentExcept(getTagString());
+        ((MainActivity) mContext).removeAllFragmentExcept(getTagString());
     }
 
     public void onSideSwitch(View v) {
@@ -106,7 +104,7 @@ public abstract class BaseFragment extends BaseLazyFragment implements BaseView 
         new android.os.Handler().post(new Runnable() {
             @Override
             public void run() {
-                ((MainActivity2)mContext).goToSide(cx, cy, isAppBarExpanded(), side);
+                ((MainActivity)mContext).goToSide(cx, cy, isAppBarExpanded(), side);
             }
         });
     }

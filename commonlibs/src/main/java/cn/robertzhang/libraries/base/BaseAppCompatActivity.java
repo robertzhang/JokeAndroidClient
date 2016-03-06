@@ -15,16 +15,16 @@ import android.view.WindowManager;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 import cn.robertzhang.libraries.R;
 import cn.robertzhang.libraries.eventbus.EventMessage;
-import cn.robertzhang.libraries.eventbus.IEventBus;
 import cn.robertzhang.libraries.loadingview.LoadingViewHelperController;
 import cn.robertzhang.libraries.netstatus.NetChangeObserver;
 import cn.robertzhang.libraries.netstatus.NetStateReceiver;
 import cn.robertzhang.libraries.utils.CommonUtils;
 import cn.robertzhang.libraries.utils.NetUtils;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by robertzhang on 16/1/20.

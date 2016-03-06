@@ -38,6 +38,9 @@ public class JsonParserUtils {
 
         OneResult result = GsonUtils.parseJson(s, OneResult.class);
         T parse = null;
+        if (result == null) {
+            return parse;
+        }
         if (result.getResult() != null && (result.getResult().equals("SUCCESS"))
                 || (result.getRs() != null && result.getRs().equals("SUCCESS"))) {
             if (mClass == Home.class) {

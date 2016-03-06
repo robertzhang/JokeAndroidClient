@@ -10,25 +10,20 @@ import android.widget.ImageView;
 
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.robertzhang.joke.R;
+import cn.robertzhang.joke.app.JokeApplication;
 import cn.robertzhang.joke.presenter.doubi.JokePresenter;
-import cn.robertzhang.joke.presenter.doubi.Presenter;
 import cn.robertzhang.joke.ui.Fragment.BaseFragment;
 import cn.robertzhang.joke.ui.activity.BaseActivity;
 import cn.robertzhang.joke.ui.adapter.doubi.JokeFragmentVPAdapter;
-import cn.robertzhang.joke.view.JokeView;
-import cn.robertzhang.libraries.base.BaseLazyFragment;
-import cn.robertzhang.libraries.eventbus.EventMessage;
 
 /**
  * Created by robertzhang on 16/2/16.
  * email: robertzhangsh@gmail.com
  */
-public class JokeMainFragment extends BaseFragment implements JokeView{
+public class JokeMainFragment extends BaseFragment{
 
     @Bind(R.id.header)
     ImageView header;
@@ -48,7 +43,12 @@ public class JokeMainFragment extends BaseFragment implements JokeView{
     @Bind(R.id.smart_tab_layout)
     SmartTabLayout smart_tab_layout;
 
-    private Presenter jokePresenter;
+
+    JokePresenter mJokePresenter;
+    public JokeMainFragment() {
+        super();
+        mJokePresenter = JokePresenter.getInstance();
+    }
 
     public static JokeMainFragment newInstance() {
         return new JokeMainFragment();
@@ -77,37 +77,6 @@ public class JokeMainFragment extends BaseFragment implements JokeView{
         return "doubi";
     }
 
-
-    // implements JokeView
-    @Override
-    public void initializeViews(List<BaseLazyFragment> fragments) {
-        ((BaseActivity) mContext).setSupportActionBar(common_toolbar);
-        ((BaseActivity)mContext).getSupportActionBar().setTitle(getResources().getString(R.string.app_name));
-
-        viewpage.setOffscreenPageLimit(((JokePresenter) jokePresenter).jokeCategoryArray.length);
-        viewpage.setAdapter(new JokeFragmentVPAdapter(getChildFragmentManager(),
-                ((JokePresenter) jokePresenter).jokeCategoryArray));
-
-        smart_tab_layout.setViewPager(viewpage);
-        smart_tab_layout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                JokeFragment fragment = (JokeFragment)viewpage.
-                        getAdapter().instantiateItem(viewpage, position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-    }
-
     // extends BaseFragment
     protected boolean isAppBarExpanded() {
         return mAppBarLayout != null && mAppBarLayout.getBottom() == mAppBarLayout.getHeight();
@@ -129,6 +98,12 @@ public class JokeMainFragment extends BaseFragment implements JokeView{
     }
 
     @Override
+    public void onDestroy() {
+        mJokePresenter.finsh();
+        super.onDestroy();
+    }
+
+    @Override
     protected View getLoadingTargetView() {
 //        return null;
         return ButterKnife.findById(getActivity(), R.id.viewpage);
@@ -136,18 +111,37 @@ public class JokeMainFragment extends BaseFragment implements JokeView{
 
     @Override
     protected void initViewsAndEvents() {
-        jokePresenter = new JokePresenter(this);
-        jokePresenter.initialized();
+        String[] array = JokeApplication.getAppContext().
+                getResources().getStringArray(R.array.joke_tab_list);
+        ((BaseActivity) mContext).setSupportActionBar(common_toolbar);
+        ((BaseActivity)mContext).getSupportActionBar().setTitle(getResources().getString(R.string.doubi_title));
+
+        viewpage.setOffscreenPageLimit(array.length);
+        viewpage.setAdapter(new JokeFragmentVPAdapter(getChildFragmentManager(), array));
+
+        smart_tab_layout.setViewPager(viewpage);
+        smart_tab_layout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                JokeFragment fragment = (JokeFragment) viewpage.
+                        getAdapter().instantiateItem(viewpage, position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_joke;
-    }
-
-    @Override
-    protected void onEventComming(EventMessage eventMessage) {
-
     }
 
     @Override

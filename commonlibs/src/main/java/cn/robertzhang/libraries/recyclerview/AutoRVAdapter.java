@@ -13,13 +13,13 @@ import java.util.List;
  * Created by robertzhang on 16/2/1.
  * email: robertzhangsh@gmail.com
  */
-public abstract class AutoRVAdapter extends RecyclerView.Adapter<BaseViewHolder>{
+public abstract class AutoRVAdapter<T> extends RecyclerView.Adapter<BaseViewHolder>{
 
-    public List<?> list;
+    public List<T> list;
 
     private Context context;
 
-    public AutoRVAdapter(Context context, List<?> list) {
+    public AutoRVAdapter(Context context, List<T> list) {
         this.list = list;
         this.context = context;
     }

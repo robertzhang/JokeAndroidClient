@@ -21,7 +21,9 @@ public class JokeFragmentVPAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        return new JokeFragment();
+        JokeFragment jokeFragment = new JokeFragment();
+        jokeFragment.setIndex(position);
+        return jokeFragment;
     }
 
     @Override

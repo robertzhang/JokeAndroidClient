@@ -4,6 +4,16 @@ package cn.robertzhang.libraries.eventbus;
  * Created by robertzhang on 16/1/20.
  * email: robertzhangsh@gmail.com
  */
+
+
+/*******************************
+ *
+ *
+ *  EventBus 升级到3.0，以下方法弃用
+ *
+ *
+ * ****************************
+ */
 public abstract interface IEventBus {
 
     /*

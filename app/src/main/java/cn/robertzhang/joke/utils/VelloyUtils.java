@@ -15,6 +15,14 @@ import cn.robertzhang.libraries.volley.VolleyHelper;
  */
 public class VelloyUtils {
 
+    public static void getJokeData(VolleyCallBack volleyCallBack, String page, String url, int flag){
+        Map<String,String> map = new HashMap<String, String>();
+//        map.put("count",String.valueOf(20));
+        map.put("page", page);
+        VolleyHelper.getInstance(JokeApplication.getAppContext()).setVolleyCallBack(volleyCallBack).
+                postNetData(url, map, flag);
+    }
+
     public static void getWenQData(VolleyCallBack volleyCallBack, String strDate, String strRow,String url, int flag){
         Map<String,String> map = new HashMap<String, String>();
         map.put("strDate",strDate);

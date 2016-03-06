@@ -1,10 +1,8 @@
 package cn.robertzhang.joke.presenter.wenq;
 
-import java.util.ArrayList;
-
 import cn.robertzhang.joke.config.APIContants;
 import cn.robertzhang.joke.model.entities.one.Article;
-import cn.robertzhang.joke.view.ILoadView;
+import cn.robertzhang.joke.view.wenq.ILoadView;
 
 /**
  * Created by robertzhang on 16/2/29.

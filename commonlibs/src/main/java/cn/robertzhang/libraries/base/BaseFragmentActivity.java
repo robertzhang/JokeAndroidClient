@@ -34,13 +34,12 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import butterknife.ButterKnife;
 import cn.robertzhang.libraries.R;
 import cn.robertzhang.libraries.eventbus.EventMessage;
-import cn.robertzhang.libraries.eventbus.IEventBus;
 import cn.robertzhang.libraries.loadingview.LoadingViewHelperController;
 import cn.robertzhang.libraries.netstatus.NetChangeObserver;
 import cn.robertzhang.libraries.netstatus.NetStateReceiver;
 import cn.robertzhang.libraries.utils.CommonUtils;
 import cn.robertzhang.libraries.utils.NetUtils;
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Author:  Tau.Chen
@@ -48,7 +47,7 @@ import de.greenrobot.event.EventBus;
  * Date:    2015/3/9.
  * Description:
  */
-public abstract class BaseFragmentActivity extends FragmentActivity implements IEventBus{
+public abstract class BaseFragmentActivity extends FragmentActivity{
 
     /**
      * Log tag
@@ -434,29 +433,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements I
             mLoadingViewHelperController.restore();
         }
     }
-
-    // begin --- implements IEventBus method
-    public void onEventBackground(EventMessage eventMessage){
-        if (null != eventMessage) {
-            onEventComming(eventMessage);
-        }
-    }
-
-    @Override
-    public void onEvent(EventMessage eventMessage) {
-
-    }
-
-    @Override
-    public void onEventMainThread(EventMessage eventMessage) {
-
-    }
-
-    @Override
-    public void onEventAsync(EventMessage eventMessage) {
-
-    }
-    // end --- implements IEventBus method
 
     /**
      * use SytemBarTintManager

@@ -7,8 +7,7 @@ import java.util.List;
 import cn.robertzhang.joke.config.Contants;
 import cn.robertzhang.joke.utils.JsonParserUtils;
 import cn.robertzhang.joke.utils.VelloyUtils;
-import cn.robertzhang.joke.view.ILoadView;
-import cn.robertzhang.libraries.utils.LogUtils;
+import cn.robertzhang.joke.view.wenq.ILoadView;
 import cn.robertzhang.libraries.utils.TimeUtil;
 import cn.robertzhang.libraries.volley.VolleyCallBack;
 
