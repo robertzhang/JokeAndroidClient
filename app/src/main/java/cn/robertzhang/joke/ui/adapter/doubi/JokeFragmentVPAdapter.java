@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import cn.robertzhang.joke.ui.Fragment.doubi.JokeFragment;
+import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
  * Created by robertzhang on 16/1/30.
@@ -14,6 +15,14 @@ public class JokeFragmentVPAdapter extends FragmentPagerAdapter{
 
     private String[] titles = null;
 
+    private JokeFragment mHotFragment = null;
+
+    private JokeFragment mNewstFragment = null;
+
+    private JokeFragment mTruthFragment = null;
+
+    protected JokeFragment mCurrentFragment = null;
+
     public JokeFragmentVPAdapter(FragmentManager fm, String[] title) {
         super(fm);
         titles = title;
@@ -21,9 +30,30 @@ public class JokeFragmentVPAdapter extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-        JokeFragment jokeFragment = new JokeFragment();
-        jokeFragment.setIndex(position);
-        return jokeFragment;
+        switch (position) {
+            case 0:
+                if (mHotFragment == null) {
+                    mHotFragment = new JokeFragment();
+                    mHotFragment.setIndex(0);
+                }
+                mCurrentFragment = mHotFragment;
+                break;
+            case 1:
+                if (mNewstFragment == null) {
+                    mNewstFragment = new JokeFragment();
+                    mNewstFragment.setIndex(1);
+                }
+                mCurrentFragment = mNewstFragment;
+                break;
+            case 2:
+                if (mTruthFragment == null) {
+                    mTruthFragment = new JokeFragment();
+                    mTruthFragment.setIndex(2);
+                }
+                mCurrentFragment = mTruthFragment;
+                break;
+        }
+        return mCurrentFragment;
     }
 
     @Override

@@ -27,6 +27,7 @@ import cn.robertzhang.joke.view.doubi.JokeResponseEventMessage;
 import cn.robertzhang.joke.widget.recyclerviewloadmore.ExRcvAdapterWrapper;
 import cn.robertzhang.joke.widget.recyclerviewloadmore.OnRcvScrollListener;
 import cn.robertzhang.libraries.eventbus.EventMessage;
+import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
  * Created by robertzhang on 16/1/29.
@@ -43,6 +44,8 @@ public class JokeFragment extends BaseFragment{
 
     private int current_index = 0;
 
+    private int action = Contants.NONE;
+
     public void setIndex(int position) {
         current_index = position;
     }
@@ -51,8 +54,8 @@ public class JokeFragment extends BaseFragment{
     @Override
     protected void onFirstUserVisible() {
         View mFooterView = LayoutInflater.from(getActivity()).inflate(R.layout.recycler_footer,null);
-        View mHeaderView = LayoutInflater.from(getActivity()).inflate(R.layout.recycler_footer,null);
-        ((TextView)mHeaderView.findViewById(R.id.loading_msg)).setText(R.string.refresh_str);
+//        View mHeaderView = LayoutInflater.from(getActivity()).inflate(R.layout.recycler_footer,null);
+//        ((TextView)mHeaderView.findViewById(R.id.loading_msg)).setText(R.string.refresh_str);
 
         list = new ArrayList<Item>();
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
@@ -64,34 +67,11 @@ public class JokeFragment extends BaseFragment{
 
         ExRcvAdapterWrapper adapterWrapper = new ExRcvAdapterWrapper<>(mAdpter, llm);
         adapterWrapper.setFooterView(mFooterView);
-        adapterWrapper.setHeaderView(mHeaderView);
+//        adapterWrapper.setHeaderView(mHeaderView);
 
         fragment_list_rv.setAdapter(adapterWrapper);
 
-        EventBus.getDefault().post(new JokeLoadDataMessageEvent(Contants.REFRESH, current_index));
-    }
-
-    public List<Item> getData(){
-        List<Item> list = new ArrayList<Item>();
-        Item a = new Item(1L);
-        a.setContent("demo demo demo demo demo demo demo ");
-        list.add(a);
-        Item a1 = new Item(2L);
-        a1.setContent("demo demo  ");
-        list.add(a1);
-        Item a2 = new Item(2L);
-        a2.setContent("demo demo demo demo  ");
-        list.add(a2);
-        Item a3 = new Item(3L);
-        a3.setContent("demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo demo");
-        list.add(a3);
-        Item a4 = new Item(4L);
-        a4.setContent("demo  ");
-        list.add(a4);
-        Item a5 = new Item(5L);
-        a5.setContent("demo demo demo demo demo demo demo ");
-        list.add(a5);
-        return list;
+        onLoadData(Contants.REFRESH, current_index);
     }
 
     @Override
@@ -102,20 +82,29 @@ public class JokeFragment extends BaseFragment{
             @Override
             public void onScrollDown() {}
             @Override
-            public void onBottom() {}
+            public void onScrolled(int distanceX, int distanceY) {
+            }
+            @Override
+            public void onBottom() {
+                // 加载更多操作
+                onLoadData(Contants.LOADMORE, current_index);
+            }
 
             @Override
             public void onTop() {
                 // 刷新操作
-                EventBus.getDefault().post(new JokeLoadDataMessageEvent(Contants.REFRESH, current_index));
-            }
-
-            @Override
-            public void onScrolled(int distanceX, int distanceY) {
-                // 加载更多操作
-                EventBus.getDefault().post(new JokeLoadDataMessageEvent(Contants.LOADMORE, current_index));
+//                EventBus.getDefault().post(new JokeLoadDataMessageEvent(Contants.REFRESH, current_index));
             }
         });
+    }
+
+    private void onLoadData(int action, int index) {
+        if (this.action == Contants.NONE) {
+            EventBus.getDefault().post(new JokeLoadDataMessageEvent(action, index));
+            this.action = action;
+        } else {
+            showToast("正在加载，请耐心等待！");
+        }
     }
 
     @Override
@@ -160,25 +149,28 @@ public class JokeFragment extends BaseFragment{
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refreshUI(JokeResponseEventMessage em) {
-        if (em.getEventCode() == Contants.REFRESH) {
-            fragment_list_rv.scrollToPosition(1);
-            if (mAdpter != null) {
-                mAdpter.refreshData(em.getData());
+        if (em.getEventCode() == current_index  && action != Contants.NONE) {
+            if (action == Contants.REFRESH) {
+                if (mAdpter != null) {
+                    //fragment_list_rv.scrollToPosition(1);
+                    mAdpter.refreshData(em.getData());
+                }
+            } else if (action == Contants.LOADMORE) {
+                if (mAdpter != null) {
+                    mAdpter.addData(em.getData());
+                }
             }
-        } else if (em.getEventCode() == Contants.LOADMORE) {
-            if (mAdpter != null) {
-                mAdpter.addData(em.getData());
-            }
+            action = Contants.NONE;
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void loadError(JokeErrorMessageEvent em) {
         //根据操作，做出相应的错误处理
-        if (em.getEventCode() == Contants.REFRESH) {
+        if (action == Contants.REFRESH) {
             fragment_list_rv.scrollToPosition(1);
             showToast("服务器挂了，稍候再试....");
-        } else if (em.getEventCode() == Contants.LOADMORE) {
+        } else if (action == Contants.LOADMORE) {
             if (mAdpter != null) {
                 fragment_list_rv.scrollToPosition(mAdpter.getItemCount());
             }
