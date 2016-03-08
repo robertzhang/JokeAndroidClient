@@ -26,8 +26,9 @@
             >
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/cardview_avator_iv"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="5dp"
                 app:placeholderImage="@drawable/picture_holder"/>
             <!--<ImageView-->
                 <!--android:id="@+id/cardview_avator_iv"-->
@@ -41,35 +42,44 @@
                 android:id="@+id/cardview_avator_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="robert zhang"
+                android:textStyle="bold"
                 android:layout_centerVertical="true"/>
 
-            <TextView
-                android:id="@+id/cardview_data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1024"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+            <!--<TextView-->
+                <!--android:id="@+id/cardview_data"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="1024"-->
+                <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"/>-->
 
         </RelativeLayout>
         <TextView
             android:id="@+id/cardview_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="label，label，)"
+            android:lineSpacingExtra="5dp"
+            android:lineSpacingMultiplier="1.2"
             android:ellipsize="none"
             android:layout_margin="5dp"/>
 
-        <cn.robertzhang.libraries.widgets.SmoothImageView
+        <!--<cn.robertzhang.libraries.widgets.SmoothImageView-->
+            <!--android:id="@+id/cardview_siv"-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:background="@mipmap/ic_launcher"-->
+            <!--/>-->
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/cardview_siv"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@mipmap/ic_launcher"
-            />
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_margin="5dp"
+            app:placeholderImage="@drawable/picture_holder"/>
     </LinearLayout>
 
 

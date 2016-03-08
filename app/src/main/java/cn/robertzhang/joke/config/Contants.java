@@ -6,8 +6,10 @@ package cn.robertzhang.joke.config;
  */
 public class Contants {
 
+    public final static int NONE = -1;
+
     public final static int LOADMORE = 0;
 
-    public final static int REFRESH  = 1;
+    public final static int REFRESH = 1;
 
 }

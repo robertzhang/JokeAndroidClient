@@ -157,7 +157,7 @@ public class MainActivity extends BaseActivity implements MainActivityInterface{
         fragment_current = fragment_doubi;
         getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.fade_in, 0)
-                .add(R.id.app_container, fragment_current, "wenqing")
+                .replace(R.id.app_container, fragment_current, "wenqing")
                 .commit();
     }
 

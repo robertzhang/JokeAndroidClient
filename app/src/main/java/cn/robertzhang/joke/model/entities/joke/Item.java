@@ -1,5 +1,6 @@
 package cn.robertzhang.joke.model.entities.joke;
 
+import cn.robertzhang.joke.app.JokeApplication;
 import cn.robertzhang.joke.model.dao.DaoSession;
 import cn.robertzhang.joke.model.dao.ItemDao;
 import cn.robertzhang.joke.model.dao.UserDao;
@@ -225,15 +226,17 @@ public class Item {
     /** To-one relationship, resolved on first access. */
     public User getUser() {
         Long __key = this.userid;
-        if (user__resolvedKey == null || !user__resolvedKey.equals(__key)) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            UserDao targetDao = daoSession.getUserDao();
-            User userNew = targetDao.load(__key);
-            synchronized (this) {
-                user = userNew;
-            	user__resolvedKey = __key;
+        if (daoSession != null) {
+            if (user__resolvedKey == null || !user__resolvedKey.equals(__key)) {
+                if (daoSession == null) {
+                    throw new DaoException("Entity is detached from DAO context");
+                }
+                UserDao targetDao = daoSession.getUserDao();
+                User userNew = targetDao.load(__key);
+                synchronized (this) {
+                    user = userNew;
+                    user__resolvedKey = __key;
+                }
             }
         }
         return user;
@@ -250,15 +253,17 @@ public class Item {
     /** To-one relationship, resolved on first access. */
     public Votes getVotes() {
         Long __key = this.voteid;
-        if (votes__resolvedKey == null || !votes__resolvedKey.equals(__key)) {
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            VotesDao targetDao = daoSession.getVotesDao();
-            Votes votesNew = targetDao.load(__key);
-            synchronized (this) {
-                votes = votesNew;
-            	votes__resolvedKey = __key;
+        if (daoSession != null) {
+            if (votes__resolvedKey == null || !votes__resolvedKey.equals(__key)) {
+                if (daoSession == null) {
+                    throw new DaoException("Entity is detached from DAO context");
+                }
+                VotesDao targetDao = daoSession.getVotesDao();
+                Votes votesNew = targetDao.load(__key);
+                synchronized (this) {
+                    votes = votesNew;
+                    votes__resolvedKey = __key;
+                }
             }
         }
         return votes;

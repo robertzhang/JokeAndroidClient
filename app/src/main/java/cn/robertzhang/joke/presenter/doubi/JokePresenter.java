@@ -37,22 +37,24 @@ public class JokePresenter implements Presenter, VolleyCallBack{
     public final static int NEWST_TAG = 1;
     public final static int TRUTH_TAG = 2;
 
-    private volatile static JokePresenter mInstances;
+//    private volatile static JokePresenter mInstances;
 
     public JokePresenter(){
         initialized();
     }
 
-    public static JokePresenter getInstance() {
-        if (mInstances == null) {
-            synchronized (JokePresenter.class) {
-                if (mInstances == null) {
-                    mInstances = new JokePresenter();
-                }
-            }
-        }
 
-        return mInstances;
+    // 这里使用单例会有一些问题。
+    public static JokePresenter getInstance() {
+//        if (mInstances == null) {
+//            synchronized (JokePresenter.class) {
+//                if (mInstances == null) {
+//                    mInstances = new JokePresenter();
+//                }
+//            }
+//        }
+
+        return new JokePresenter();
     }
 
 
@@ -94,7 +96,7 @@ public class JokePresenter implements Presenter, VolleyCallBack{
                 return;
         }
         String page = String.valueOf(index + 1);
-        VelloyUtils.getJokeData(this, page, url, Contants.LOADMORE);
+        VelloyUtils.getJokeData(this, page, url, tag);
     }
 
     private void onRefresh(int tag){
@@ -116,7 +118,7 @@ public class JokePresenter implements Presenter, VolleyCallBack{
                 return;
         }
         String page = String.valueOf(1);
-        VelloyUtils.getJokeData(this, page, url, Contants.REFRESH);
+        VelloyUtils.getJokeData(this, page, url, tag);
     }
 
     // --------- implements VolleyCallBack
@@ -136,10 +138,8 @@ public class JokePresenter implements Presenter, VolleyCallBack{
         List<Item> items = JsonParserUtils.parseJokeResponse(em.getData()).getItems();
         if (items == null || items.size() <= 0) {
             onLoadFail(em.getEventCode());
-//            mIView.loadError(type);
         } else {
             EventBus.getDefault().post(new JokeResponseEventMessage(em.getEventCode(), items));
-//            mIView.refreshUI(items, type);
         }
     }
 

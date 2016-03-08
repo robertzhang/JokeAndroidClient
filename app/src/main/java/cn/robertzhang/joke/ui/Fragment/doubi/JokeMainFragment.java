@@ -18,6 +18,7 @@ import cn.robertzhang.joke.presenter.doubi.JokePresenter;
 import cn.robertzhang.joke.ui.Fragment.BaseFragment;
 import cn.robertzhang.joke.ui.activity.BaseActivity;
 import cn.robertzhang.joke.ui.adapter.doubi.JokeFragmentVPAdapter;
+import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
  * Created by robertzhang on 16/2/16.
@@ -33,9 +34,6 @@ public class JokeMainFragment extends BaseFragment{
 
     @Bind(R.id.viewpage)
     ViewPager viewpage;
-
-    @Bind(R.id.collapsing_toolbar_layout)
-    CollapsingToolbarLayout collapsing_toolbar_layout;
 
     @Bind(R.id.app_bar_layout)
     AppBarLayout mAppBarLayout;
@@ -120,23 +118,6 @@ public class JokeMainFragment extends BaseFragment{
         viewpage.setAdapter(new JokeFragmentVPAdapter(getChildFragmentManager(), array));
 
         smart_tab_layout.setViewPager(viewpage);
-        smart_tab_layout.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                JokeFragment fragment = (JokeFragment) viewpage.
-                        getAdapter().instantiateItem(viewpage, position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     @Override

@@ -47,17 +47,17 @@ public class VolleyHelper {
     }
 
     // Volley处理get请求
-    public void getNetData(String url) {
+    public void getNetData(String url, final int type) {
         //通过URL获取对应的数据
         StringRequest strRequest = new StringRequest(url,new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                mCallback.onVolleyResponseSucc(-1, response);
+                mCallback.onVolleyResponseSucc(type, response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                mCallback.onVolleyResponseFail(-1, error.getMessage());
+                mCallback.onVolleyResponseFail(type, error.getMessage());
             }
         });
         mRequestQueue.add(strRequest);
