@@ -11,11 +11,10 @@
     card_view:cardElevation="@dimen/cardview_default_elevation"
     card_view:cardPreventCornerOverlap="true"
     card_view:cardUseCompatPadding="true"
-    card_view:contentPadding="15dp"
+    card_view:cardBackgroundColor="@color/red"
     >
 
     <LinearLayout
-        android:background="#AAe6e6e6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -45,6 +44,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="robert zhang"
                 android:textStyle="bold"
+                android:textColor="@color/alpha_80_white"
                 android:layout_centerVertical="true"/>
 
             <!--<TextView-->
@@ -65,6 +65,7 @@
             android:text="label，label，)"
             android:lineSpacingExtra="5dp"
             android:lineSpacingMultiplier="1.2"
+            android:textColor="@color/alpha_80_white"
             android:ellipsize="none"
             android:layout_margin="5dp"/>
 

@@ -19,6 +19,7 @@ import cn.robertzhang.joke.ui.activity.MainActivity;
 import cn.robertzhang.joke.view.BaseView;
 import cn.robertzhang.joke.widget.ClipRevealFrame;
 import cn.robertzhang.libraries.base.BaseLazyFragment;
+import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
  * Author:  Tau.Chen
@@ -165,7 +166,12 @@ public abstract class BaseFragment extends BaseLazyFragment implements BaseView 
 
     @Override
     public void showNetError() {
-        toggleNetworkError(true, null);
+        toggleNetworkError(true, new View.OnClickListener(){ // 添加点击事件，做相应的处理
+            @Override
+            public void onClick(View view) {
+                toggleNetworkError(false, null);
+            }
+        });
     }
 
     @Override

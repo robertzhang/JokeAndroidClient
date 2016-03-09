@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">JokeAndroidClient</string>
 
+    <string name="menu_change_role">Change Role</string>
     <string name="menu_about_str">About me</string>
     <string name="menu_github_str">GetHub</string>
     <string name="double_click_exit">Press again to exit</string>
@@ -17,4 +18,7 @@
     <string name="refresh_str">refresh new data ....</string>
     <string name="wenq_title">WenQ</string>
     <string name="doubi_title">DouBi</string>
+
+    <string name="net_error_warming">Network disconnect, please check on</string>
+    <string name="wifi_state_warming">Not connecting wifi</string>
 </resources>

@@ -23,4 +23,6 @@
     <!-- smart tab layout -->
     <color name="smart_tab_underline_color">@android:color/holo_red_light</color>
 
+    <color name="red">@android:color/holo_red_light</color>
+
 </resources>

@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">逗逼VS文青</string>
 
+    <string name="menu_change_role">变身</string>
     <string name="menu_about_str">关于我</string>
     <string name="menu_github_str">GetHub相关</string>
     <string name="double_click_exit">再按一次退出</string>
@@ -18,4 +19,7 @@
     <string name="refresh_str">正在刷新数据....</string>
     <string name="wenq_title">文青范</string>
     <string name="doubi_title">逗逼模式</string>
+
+    <string name="net_error_warming">网络不可用，请检查网络</string>
+    <string name="wifi_state_warming">当前非WIFI链接，请注意流量使用</string>
 </resources>

@@ -3,7 +3,9 @@ package cn.robertzhang.joke.ui.adapter.doubi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
+import cn.robertzhang.joke.config.Contants;
 import cn.robertzhang.joke.ui.Fragment.doubi.JokeFragment;
 import cn.robertzhang.libraries.utils.LogUtils;
 
@@ -11,7 +13,7 @@ import cn.robertzhang.libraries.utils.LogUtils;
  * Created by robertzhang on 16/1/30.
  * email: robertzhangsh@gmail.com
  */
-public class JokeFragmentVPAdapter extends FragmentPagerAdapter{
+public class JokeFragmentVPAdapter extends FragmentStatePagerAdapter {
 
     private String[] titles = null;
 

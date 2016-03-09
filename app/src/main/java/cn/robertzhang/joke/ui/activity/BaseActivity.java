@@ -3,6 +3,7 @@ package cn.robertzhang.joke.ui.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import butterknife.ButterKnife;
 import cn.robertzhang.joke.R;
@@ -65,7 +66,12 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements Base
 
     @Override
     public void showNetError() {
-        toggleNetworkError(true, null);
+        toggleNetworkError(true, new View.OnClickListener(){ // 添加点击事件，做相应的处理
+            @Override
+            public void onClick(View view) {
+                toggleNetworkError(false, null);
+            }
+        });
     }
 
     @Override

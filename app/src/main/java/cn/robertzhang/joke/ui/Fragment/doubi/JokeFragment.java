@@ -27,6 +27,7 @@ import cn.robertzhang.joke.view.doubi.JokeResponseEventMessage;
 import cn.robertzhang.joke.widget.recyclerviewloadmore.ExRcvAdapterWrapper;
 import cn.robertzhang.joke.widget.recyclerviewloadmore.OnRcvScrollListener;
 import cn.robertzhang.libraries.eventbus.EventMessage;
+import cn.robertzhang.libraries.netstatus.NetStateReceiver;
 import cn.robertzhang.libraries.utils.LogUtils;
 
 /**
@@ -42,12 +43,16 @@ public class JokeFragment extends BaseFragment{
 
     JokeRVAdapter mAdpter;
 
-    private int current_index = 0;
+    private int current_index = 0;// 表示当前fragment在viewpager的索引
 
-    private int action = Contants.NONE;
+    private int action = Contants.NONE; // 当前fragment的是否在更新内容
 
     public void setIndex(int position) {
         current_index = position;
+    }
+
+    public int getIndex() {
+        return current_index;
     }
 
     // -------- extends BaseFragment
@@ -98,13 +103,18 @@ public class JokeFragment extends BaseFragment{
         });
     }
 
-    private void onLoadData(int action, int index) {
-        if (this.action == Contants.NONE) {
-            EventBus.getDefault().post(new JokeLoadDataMessageEvent(action, index));
-            this.action = action;
+    public void onLoadData(int action, int index) {
+        if (NetStateReceiver.isNetworkAvailable()) {
+            if (this.action == Contants.NONE) {
+                EventBus.getDefault().post(new JokeLoadDataMessageEvent(action, index));
+                this.action = action;
+            } else {
+                showToast("正在加载，请耐心等待！");
+            }
         } else {
-            showToast("正在加载，请耐心等待！");
+            showToast(getString(R.string.net_error_warming));
         }
+
     }
 
     @Override
@@ -157,6 +167,8 @@ public class JokeFragment extends BaseFragment{
                 }
             } else if (action == Contants.LOADMORE) {
                 if (mAdpter != null) {
+                    // 更新当前fragment加载page
+                    EventBus.getDefault().post(new JokeLoadDataMessageEvent(Contants.UPDATAINDEX,current_index));
                     mAdpter.addData(em.getData());
                 }
             }

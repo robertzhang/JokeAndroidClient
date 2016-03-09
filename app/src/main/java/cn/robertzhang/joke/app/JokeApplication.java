@@ -58,6 +58,7 @@ public class JokeApplication extends Application{
      */
     public void exitApp() {
         BaseAppManager.getInstance().clear();
+        System.exit(0);
         System.gc();
         android.os.Process.killProcess(android.os.Process.myPid());
     }
