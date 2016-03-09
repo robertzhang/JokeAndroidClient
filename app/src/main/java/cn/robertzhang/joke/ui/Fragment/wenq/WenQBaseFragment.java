@@ -17,6 +17,7 @@ import cn.robertzhang.joke.ui.adapter.wenq.WenQBaseAdapter;
 import cn.robertzhang.joke.view.wenq.ILoadView;
 import cn.robertzhang.joke.widget.recyclerviewloadmore.ExRcvAdapterWrapper;
 import cn.robertzhang.joke.widget.recyclerviewloadmore.OnRcvScrollListener;
+import cn.robertzhang.libraries.netstatus.NetStateReceiver;
 
 /**
  * Created by robertzhang on 16/3/3.
@@ -29,7 +30,7 @@ public abstract class WenQBaseFragment<T> extends SimpleBaseFragment implements 
 
     WenQBaseAdapter mAdpter;
 
-    protected WenQLoadDataPresenter mPresenter;
+    WenQLoadDataPresenter mPresenter;
 
 
     protected abstract WenQBaseAdapter getWenQAdapter(List<T> mList);
@@ -61,7 +62,9 @@ public abstract class WenQBaseFragment<T> extends SimpleBaseFragment implements 
 
         wenqin_list_rv.setAdapter(adapterWrapper);// 设置适配器
 
-        mPresenter.onRefrest();
+        if (NetStateReceiver.isNetworkAvailable()) {
+            mPresenter.onRefrest();
+        }
     }
 
     @Override
@@ -82,13 +85,21 @@ public abstract class WenQBaseFragment<T> extends SimpleBaseFragment implements 
             @Override
             public void onTop(){
                 /**在这里添加，刷新的请求*/
-                mPresenter.onRefrest();
+                if (NetStateReceiver.isNetworkAvailable()) {
+                    mPresenter.onRefrest();
+                } else {
+                    showToast(getString(R.string.net_error_warming));
+                }
             }
 
             @Override
             public void onBottom() {
                 /** 在这里添加，加载更多的请求*/
-                mPresenter.onLoadMore();
+                if (NetStateReceiver.isNetworkAvailable()) {
+                    mPresenter.onLoadMore();
+                } else {
+                    showToast(getString(R.string.net_error_warming));
+                }
             }
         });
     }

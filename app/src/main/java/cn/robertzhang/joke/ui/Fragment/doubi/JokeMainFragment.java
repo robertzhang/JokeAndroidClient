@@ -1,10 +1,12 @@
 package cn.robertzhang.joke.ui.Fragment.doubi;
 
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -41,8 +43,9 @@ public class JokeMainFragment extends BaseFragment{
     @Bind(R.id.smart_tab_layout)
     SmartTabLayout smart_tab_layout;
 
+    private JokeFragmentVPAdapter jfvpa;
 
-    JokePresenter mJokePresenter;
+    private JokePresenter mJokePresenter;
     public JokeMainFragment() {
         super();
         mJokePresenter = JokePresenter.getInstance();
@@ -103,7 +106,6 @@ public class JokeMainFragment extends BaseFragment{
 
     @Override
     protected View getLoadingTargetView() {
-//        return null;
         return ButterKnife.findById(getActivity(), R.id.viewpage);
     }
 
@@ -111,11 +113,14 @@ public class JokeMainFragment extends BaseFragment{
     protected void initViewsAndEvents() {
         String[] array = JokeApplication.getAppContext().
                 getResources().getStringArray(R.array.joke_tab_list);
-        ((BaseActivity) mContext).setSupportActionBar(common_toolbar);
+        ((BaseActivity)mContext).setSupportActionBar(common_toolbar);
         ((BaseActivity)mContext).getSupportActionBar().setTitle(getResources().getString(R.string.doubi_title));
 
+        header.setImageResource(setHeaderResId());
+
         viewpage.setOffscreenPageLimit(array.length);
-        viewpage.setAdapter(new JokeFragmentVPAdapter(getChildFragmentManager(), array));
+        jfvpa = new JokeFragmentVPAdapter(getChildFragmentManager(), array);
+        viewpage.setAdapter(jfvpa);
 
         smart_tab_layout.setViewPager(viewpage);
     }
@@ -128,6 +133,12 @@ public class JokeMainFragment extends BaseFragment{
     @Override
     protected boolean isBindEventBusHere() {
         return false;
+    }
+
+    private int setHeaderResId(){
+        TypedArray headerimage = getResources().obtainTypedArray(R.array.header_image);
+        int id = (int)(Math.random()*6);//随机生成获取一个0到5的数组
+        return headerimage.getResourceId(id, 1);
     }
 
 }

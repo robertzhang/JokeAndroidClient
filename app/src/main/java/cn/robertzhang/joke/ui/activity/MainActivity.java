@@ -20,7 +20,7 @@ import cn.robertzhang.joke.ui.Fragment.doubi.JokeMainFragment;
 import cn.robertzhang.joke.ui.Fragment.wenq.WenQMainFragment;
 import cn.robertzhang.joke.view.MainActivityInterface;
 import cn.robertzhang.libraries.eventbus.EventMessage;
-import cn.robertzhang.libraries.utils.LogUtils;
+import cn.robertzhang.libraries.netstatus.NetStateReceiver;
 import cn.robertzhang.libraries.utils.NetUtils;
 
 /**
@@ -47,8 +47,11 @@ public class MainActivity extends BaseActivity implements MainActivityInterface{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_about:
+            case R.id.action_change_role:
                 fragment_current.onSideSwitch(app_container);
+                break;
+            case R.id.action_about:
+
                 break;
             case R.id.action_github:
 
@@ -56,6 +59,7 @@ public class MainActivity extends BaseActivity implements MainActivityInterface{
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -68,6 +72,8 @@ public class MainActivity extends BaseActivity implements MainActivityInterface{
                 ((JokeApplication)getApplication()).exitApp();
             }
             return true;
+        } else if (event.getKeyCode() == KeyEvent.KEYCODE_MENU) { // 屏蔽menu键
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -77,30 +83,19 @@ public class MainActivity extends BaseActivity implements MainActivityInterface{
     public void goToSide(int cx, int cy, boolean appBarExpanded, String side) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         BaseFragment fragment;
-//        fragment_current.removeOldSideFragment();
         switch(side) {
             case "doubi":
-//                if (fragment_doubi == null){
                 fragment_doubi = JokeMainFragment.newInstance(cx,cy,appBarExpanded);
-//                }
-
                 fragment = fragment_doubi;
                 break;
             case "wenqing":
-//                if (fragment_wenqing == null) {
-                    fragment_wenqing = WenQMainFragment.newInstance(cx, cy, appBarExpanded);
-//                }
+                fragment_wenqing = WenQMainFragment.newInstance(cx, cy, appBarExpanded);
                 fragment = fragment_wenqing;
                 break;
             default:
                 throw new IllegalStateException();
         }
-//        if (!fragment_current.isAdded()) {
-////            LogUtils.E("zhangchao","---------"+side+"----");
-//            ft.add(R.id.container, fragment_current, side).commit();
-//        } else {
-            ft.replace(R.id.app_container,fragment,side).commit();
-//        }
+        ft.replace(R.id.app_container,fragment,side).commit();
 
         fragment_current = fragment;
     }
@@ -161,14 +156,35 @@ public class MainActivity extends BaseActivity implements MainActivityInterface{
                 .commit();
     }
 
+// -------如果需要监听网络情况，可以开放注释
     @Override
-    protected void onNetworkConnected(NetUtils.NetType type) {
-
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        NetStateReceiver.registerNetworkStateReceiver(this);
     }
 
     @Override
-    protected void onNetworkDisConnected() {
+    protected void onDestroy() {
+        super.onDestroy();
+        NetStateReceiver.unRegisterNetworkStateReceiver(this);
+    }
 
+    @Override
+    protected void onNetworkConnected(NetUtils.NetType type) {
+        if (type != NetUtils.NetType.WIFI) {
+            showToast(getString(R.string.wifi_state_warming));
+        }
+
+        // 网络恢复后，可以做一些操作
+    }
+
+    @Override
+    protected void onNetworkDisConnected() { // 提示当前网络异常
+        if (fragment_current.getTagString() == "doubi") {
+            showNetError();
+        } else {
+            fragment_current.showNetError();
+        }
     }
 
     @Override

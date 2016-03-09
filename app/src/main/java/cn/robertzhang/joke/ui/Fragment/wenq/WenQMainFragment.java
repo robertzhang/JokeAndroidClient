@@ -48,6 +48,10 @@ public class WenQMainFragment extends BaseFragment {
         return frag;
     }
 
+    public SimpleBaseFragment getCurrentFragment() {
+        return mCurrentFragment;
+    }
+
     @Override
     public int getTheme() {
         return R.style.WenQingAppThemeLight;

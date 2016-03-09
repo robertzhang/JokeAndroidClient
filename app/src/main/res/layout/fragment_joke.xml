@@ -24,7 +24,7 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="256dp"
+                android:layout_height="300dp"
                 android:fitsSystemWindows="true"
                 app:titleEnabled="false"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -46,7 +46,7 @@
                     android:id="@+id/common_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+
                     app:layout_collapseMode="pin"
                     android:minHeight="?attr/actionBarSize"
                     android:gravity="top"
@@ -83,6 +83,5 @@
             android:background="@color/toolbarDark"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             />
-
     </android.support.design.widget.CoordinatorLayout>
 </cn.robertzhang.joke.widget.ClipRevealFrame>

@@ -14,5 +14,13 @@
         <item>@string/thing</item>
     </string-array>
 
+    <array name="header_image">
+        <item>@drawable/header_1</item>
+        <item>@drawable/header_2</item>
+        <item>@drawable/header_3</item>
+        <item>@drawable/header_4</item>
+        <item>@drawable/header_5</item>
+        <item>@drawable/header_6</item>
+    </array>
 
 </resources>

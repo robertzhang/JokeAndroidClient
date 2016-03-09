@@ -261,18 +261,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity{
      */
     protected abstract TransitionMode getOverridePendingTransitionMode();
 
-    // begin --- implements IEventBus method
-
-    public void onEvent(EventMessage eventMessage) {
-        if (null != eventMessage) {
-            onEventComming(eventMessage);
-        }
-    }
-
-
-    // end --- implements IEventBus method
-
-
     /**
      * startActivity
      *

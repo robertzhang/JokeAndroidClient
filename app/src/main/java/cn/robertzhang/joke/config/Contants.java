@@ -12,4 +12,6 @@ public class Contants {
 
     public final static int REFRESH = 1;
 
+    public final static int UPDATAINDEX = 2;
+
 }

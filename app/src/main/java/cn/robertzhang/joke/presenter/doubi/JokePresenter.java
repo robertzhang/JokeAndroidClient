@@ -74,6 +74,18 @@ public class JokePresenter implements Presenter, VolleyCallBack{
             onLoadMore(jme.getData());
         } else if (jme.getEventCode() == Contants.REFRESH) {
             onRefresh(jme.getData());
+        } else if (jme.getEventCode() == Contants.UPDATAINDEX) {
+            switch (jme.getData()) {
+                case 0:
+                    hotIndex++;
+                    break;
+                case 1:
+                    newstIndex++;
+                    break;
+                case 2:
+                    truthIndex++;
+                    break;
+            }
         }
     }
     private void onLoadMore(int tag){
@@ -103,7 +115,7 @@ public class JokePresenter implements Presenter, VolleyCallBack{
         String url = null;
         switch (tag) {
             case HOT_TAG:
-                hotIndex = 1;
+                hotIndex = 1; // 这里其实存在问题，应该是刷新成功后再进行索引重置为1。
                 url = APIContants.URL_HOT_JOKE;
                 break;
             case NEWST_TAG:
@@ -139,6 +151,7 @@ public class JokePresenter implements Presenter, VolleyCallBack{
         if (items == null || items.size() <= 0) {
             onLoadFail(em.getEventCode());
         } else {
+
             EventBus.getDefault().post(new JokeResponseEventMessage(em.getEventCode(), items));
         }
     }
