@@ -16,4 +16,10 @@
         android:title="@string/menu_github_str"
         android:orderInCategory="300"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_github_project"
+        android:title="@string/menu_github_project_str"
+        android:orderInCategory="400"
+        app:showAsAction="never"/>
 </menu>

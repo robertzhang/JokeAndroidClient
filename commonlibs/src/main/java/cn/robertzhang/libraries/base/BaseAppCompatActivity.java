@@ -208,12 +208,6 @@ public abstract class BaseAppCompatActivity extends AppCompatActivity{
      */
     protected abstract int getContentViewLayoutID();
 
-    /**
-     * when event comming
-     *
-     * @param eventMessage
-     */
-    protected abstract void onEventComming(EventMessage eventMessage);
 
     /**
      * get loading target view

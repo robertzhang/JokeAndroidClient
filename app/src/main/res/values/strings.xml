@@ -2,8 +2,9 @@
     <string name="app_name">JokeAndroidClient</string>
 
     <string name="menu_change_role">Change Role</string>
-    <string name="menu_about_str">About me</string>
-    <string name="menu_github_str">GetHub</string>
+    <string name="menu_about_str">About Me</string>
+    <string name="menu_github_str">GitHub</string>
+    <string name="menu_github_project_str">Project Detail</string>
     <string name="double_click_exit">Press again to exit</string>
 
     <string name="home">Home</string>

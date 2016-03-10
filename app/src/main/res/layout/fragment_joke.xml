@@ -46,7 +46,6 @@
                     android:id="@+id/common_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-
                     app:layout_collapseMode="pin"
                     android:minHeight="?attr/actionBarSize"
                     android:gravity="top"

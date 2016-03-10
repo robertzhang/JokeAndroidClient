@@ -19,9 +19,10 @@ import cn.robertzhang.joke.ui.Fragment.BaseFragment;
 import cn.robertzhang.joke.ui.Fragment.doubi.JokeMainFragment;
 import cn.robertzhang.joke.ui.Fragment.wenq.WenQMainFragment;
 import cn.robertzhang.joke.view.MainActivityInterface;
-import cn.robertzhang.libraries.eventbus.EventMessage;
+import cn.robertzhang.libraries.base.BaseWebActivity;
 import cn.robertzhang.libraries.netstatus.NetStateReceiver;
 import cn.robertzhang.libraries.utils.NetUtils;
+
 
 /**
  * Created by robertzhang on 16/2/16.
@@ -51,10 +52,49 @@ public class MainActivity extends BaseActivity implements MainActivityInterface{
                 fragment_current.onSideSwitch(app_container);
                 break;
             case R.id.action_about:
-
+                // 作者
+                Bundle extras = new Bundle();
+                extras.putString(BaseWebActivity.BUNDLE_KEY_TITLE, getString(R.string.menu_about_str));
+                extras.putBoolean(BaseWebActivity.BUNDLE_KEY_SHOW_BOTTOM_BAR, true);
+                extras.putString(BaseWebActivity.BUNDLE_KEY_URL, "https://robertzhang.github.io/about/");
+                int bar_color = -1;
+                if (fragment_current.getTagString() == "wenqing") {
+                    bar_color = android.R.color.holo_blue_light;
+                } else {
+                    bar_color = android.R.color.holo_red_light;
+                }
+                extras.putInt(BaseWebActivity.BUNDLE_KEY_SYSTEMBAR_TINTDRAWABLE, bar_color);
+                readyGo(BaseWebActivity.class, extras);
                 break;
             case R.id.action_github:
-
+                // GitHub
+                Bundle extras1 = new Bundle();
+                extras1.putString(BaseWebActivity.BUNDLE_KEY_TITLE, getString(R.string.menu_github_str));
+                extras1.putBoolean(BaseWebActivity.BUNDLE_KEY_SHOW_BOTTOM_BAR, true);
+                extras1.putString(BaseWebActivity.BUNDLE_KEY_URL, "https://github.com/robertzhang");
+                int bar_color2 = -1;
+                if (fragment_current.getTagString() == "wenqing") {
+                    bar_color2 = android.R.color.holo_blue_light;
+                } else {
+                    bar_color2 = android.R.color.holo_red_light;
+                }
+                extras1.putInt(BaseWebActivity.BUNDLE_KEY_SYSTEMBAR_TINTDRAWABLE, bar_color2);
+                readyGo(BaseWebActivity.class, extras1);
+                break;
+            case R.id.action_github_project:
+                // 项目简介
+                Bundle ext = new Bundle();
+                ext.putString(BaseWebActivity.BUNDLE_KEY_TITLE, getString(R.string.menu_github_project_str));
+                ext.putBoolean(BaseWebActivity.BUNDLE_KEY_SHOW_BOTTOM_BAR, true);
+                ext.putString(BaseWebActivity.BUNDLE_KEY_URL, "https://github.com/robertzhang/JokeAndroidClient");
+                int bar_color_1 = -1;
+                if (fragment_current.getTagString() == "wenqing") {
+                    bar_color_1 = android.R.color.holo_blue_light;
+                } else {
+                    bar_color_1 = android.R.color.holo_red_light;
+                }
+                ext.putInt(BaseWebActivity.BUNDLE_KEY_SYSTEMBAR_TINTDRAWABLE, bar_color_1);
+                readyGo(BaseWebActivity.class, ext);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -136,11 +176,6 @@ public class MainActivity extends BaseActivity implements MainActivityInterface{
     }
 
     @Override
-    protected void onEventComming(EventMessage eventMessage) {
-
-    }
-
-    @Override
     protected View getLoadingTargetView() {
         return app_container;
     }
@@ -173,6 +208,12 @@ public class MainActivity extends BaseActivity implements MainActivityInterface{
     protected void onNetworkConnected(NetUtils.NetType type) {
         if (type != NetUtils.NetType.WIFI) {
             showToast(getString(R.string.wifi_state_warming));
+        }
+
+        if (fragment_current.getTagString() == "doubi") {
+            showToast("网络正常，上下滑动加载数据");
+        } else {
+            showToast("网络正常，左右滑动加载数据");
         }
 
         // 网络恢复后，可以做一些操作

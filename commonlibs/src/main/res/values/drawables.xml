@@ -20,4 +20,5 @@
     <drawable name="progress_bar_bg">#80FFFFFF</drawable>
     <drawable name="transparent">@android:color/transparent</drawable>
 
+    <!--<drawable name="base_web_activity_color">?attr/colorPrimaryDark</drawable>-->
 </resources>
