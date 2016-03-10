@@ -6,6 +6,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true">
 
+        <activity android:name=".base.BaseWebActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
+
     </application>
+
+
 
 </manifest>
