@@ -40,13 +40,13 @@ WenQ采用的是最传统的MVP模式，UI通过调用presenter接口的相关ac
 ## What it is look like
 说了半天终于到了你们想看的东西。无图无真相。好吧，满足你们。
 ### 1、Doubi
-![image](https://github.com/robertzhang/TreeTableViewWithSwift/raw/master/screenshots/Screenshot_1.png)
+![image](https://github.com/robertzhang/JokeAndroidClient/blob/master/screenshots/Screenshot_1.png)
 ### 2、WenQ
-![image](https://github.com/robertzhang/TreeTableViewWithSwift/raw/master/screenshots/Screenshot_2.png)
+![image](https://github.com/robertzhang/JokeAndroidClient/blob/master/screenshots/Screenshot_2.png)
 ### 3、菜单
-![image](https://github.com/robertzhang/TreeTableViewWithSwift/raw/master/screenshots/Screenshot_3.png)
+![image](https://github.com/robertzhang/JokeAndroidClient/blob/master/screenshots/Screenshot_3.png)
 ### 4、关于我
-![image](https://github.com/robertzhang/TreeTableViewWithSwift/raw/master/screenshots/Screenshot_4.png)
+![image](https://github.com/robertzhang/JokeAndroidClient/blob/master/screenshots/Screenshot_4.png)
 
 ## Thanks
 ### Open project
